@@ -14,7 +14,7 @@ This environment is for integration testing.
 The current OpenAPI specification can be found [here](./specification.json).
 
 To visualize this file either use your tool of choice or try:
-- [SwaggerUI](http://editor.swagger.io/?url=https://raw.githubusercontent.com/anybill/documentation/master/specification.json) or
+- [SwaggerUI](https://editor.swagger.io/?url=https://raw.githubusercontent.com/anybill/documentation/master/specification.json) or
 - [ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/anybill/documentation/master/specification.json)
 
 The always up-to-date Swagger documentation of the specific environment can also be found by navigating to the environments root url.

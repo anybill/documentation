@@ -4,10 +4,10 @@ This document describes the usage of the anybill vendor REST API.
 ## Environments
 There are currently two public environments:
 
-### Production: `https://vendor.anybill.de`
+### Production: `https://vendor-api.anybill.de`
 This environment is for production use.
 
-### Staging: `https://vendor-stg.anybill.de`
+### Staging: `https://vendor-api-stg.anybill.de`
 This environment is for integration testing.
 
 ## OpenAPI Specification

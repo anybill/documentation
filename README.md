@@ -4,13 +4,13 @@ anybill is the solution, to transfer digital receipts directly at the checkout o
 
 For technical questions, feel free to contact us:<br>
 
-Tobias Gubo<br>
-tobias.gubo@anybill.de<br>
-+49 151 20457172<br>
+> Tobias Gubo<br>
+> tobias.gubo@anybill.de<br>
+> +49 151 20457172<br>
 
-Patrick Göttler<br>
-patrick.goettler@anybill.de<br>
-+49 157 50777325<br>
+> Patrick Göttler<br>
+> patrick.goettler@anybill.de<br>
+> +49 157 50777325<br>
 
 ## Documentation
 ### HTTP API

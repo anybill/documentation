@@ -1,9 +1,14 @@
-# anybill documentation
+# Documentation
 
-# HTTP API
+# <img src="./Assets/logo.png" width="200" height="200"/> Documentation
+
+## Overview
+### HTTP API
 
 [Vendor API](./api_vendor.md)
 
-# App Documentation
+### App Documentation
 
 [QR-Code](./app_qr.md)
+
+## Workflow

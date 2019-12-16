@@ -1,6 +1,6 @@
-# Documentation
+<img src="./Assets/logo.svg" width="200" alt="anybill logo" style="float: right;"/>
 
-# <img src="./Assets/logo.png" width="200" height="200"/> Documentation
+# Documentation
 
 ## Overview
 ### HTTP API

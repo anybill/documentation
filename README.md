@@ -1,7 +1,8 @@
 # <img id="logo" src="./Assets/logo.svg" width="200" alt="anybill logo"/>
 
-anybill is the digital solution for transfering receipts to your Customers.<br>
-For Technical questions feel free to contact us:<br>
+anybill is the solution, to transfer digital receipts directly at the checkout onto your customers´ smartphone.<br>
+
+For technical questions, feel free to contact us:<br>
 
 Tobias Gubo<br>
 tobias.gubo@anybill.de<br>

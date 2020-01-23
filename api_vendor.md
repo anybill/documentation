@@ -7,7 +7,7 @@ There are currently two public environments:
 ### Production: `https://vendor.anybill.de`
 This environment is for production use.
 
-### Staging: `https://vendor-stg.anybill.de`
+### Staging: `https://vendor-api-stg.anybill.de`
 This environment is for integration testing.
 
 ## OpenAPI Specification
@@ -18,6 +18,8 @@ To visualize this file either use your tool of choice or try:
 - [ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/anybill/documentation/master/specification.json)
 
 The always up-to-date Swagger documentation of the specific environment can also be found by navigating to the environments root url.
+
+> To use the
 
 ## Postman
 A Postman collection can be found [here](./Postman/Anybill%20Vendor%20Api.postman_collection.json).

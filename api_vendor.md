@@ -12,7 +12,7 @@ This environment is for integration testing.
 
 ## Bill API
 <p>
-  To add an bill to a anybill User <b>only</b> the post bill endpoint has to be implemented.
+  To add a Bill to a anybill User <b>only</b> the post bill endpoint has to be implemented.
 </p>
 <p>
   For more information have a look at the OpenAPI Specifications.
@@ -29,20 +29,23 @@ This environment is for integration testing.
 
 ## Category API
 <p>
-  This Endpoint lists all Categories wich are available to categorize the LineItems and the Bill.
+  This Endpoint lists all Categories which are available to categorize the LineItems and the Bill.
 </p>
 <p>
   For more information have a look at the OpenAPI Specifications.
 </p>
 
 ## OpenAPI Specification
-The current OpenAPI specification can be found [here](./specification.json).
+<p>
+  Here you can find the complete OpenAPI Specifications for the Vendor API.
+</p>
+<p>
+  Click on your Preferred OpenAPI tool to view the Specifications:
+</p>
 
-To visualize this file either use your tool of choice or try:
-#### [SwaggerUI](http://editor.swagger.io/?url=https://raw.githubusercontent.com/anybill/documentation/master/specification.json)
-#### [ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/anybill/documentation/master/specification.json)
-
-The always up-to-date Swagger documentation of the specific environment can also be found by navigating to the environments root url.
+- #### [SwaggerUI](https://vendor-api-stg.anybill.de/index.html)
+- #### [ReDoc](https://redocly.github.io/redoc/?url=https://vendor-api-stg.anybill.de/swagger/v1/swagger.json)
+- #### [Raw OpenAPI Json File](https://vendor-api-stg.anybill.de/swagger/v1/swagger.json)
 
 ## Postman
 A Postman collection can be found [here](./Postman/Anybill%20Vendor%20Api.postman_collection.json).

@@ -12,10 +12,10 @@ This environment is for integration testing.
 
 ## Bill API
 <p>
-  To add a Bill to a anybill User <b>only</b> the post bill endpoint has to be implemented.
+  To add a bill to a anybill user, <b>only</b> the post bill endpoint has to be implemented.
 </p>
 <p>
-  For more information have a look at the OpenAPI Specifications.
+  Please check out the OpenAPI specifications for more information.
 </p>
 
 ## Store API
@@ -24,15 +24,15 @@ This environment is for integration testing.
   This can also be done on the anybill Partner Portal so implementing these Endpoints is not required.
 </p>
 <p>
-  For more information have a look at the OpenAPI Specifications.
+  Please check out the OpenAPI specifications for more information.
 </p>
 
 ## Category API
 <p>
-  This Endpoint lists all Categories which are available to categorize the LineItems and the Bill.
+  This endpoint lists all categories which are available to categorize the line items and the bill.
 </p>
 <p>
-  For more information have a look at the OpenAPI Specifications.
+  Please check out the OpenAPI specifications for more information.
 </p>
 
 ## OpenAPI Specification
@@ -40,7 +40,7 @@ This environment is for integration testing.
   Here you can find the complete OpenAPI Specifications for the Vendor API.
 </p>
 <p>
-  Click on your Preferred OpenAPI tool to view the Specifications:
+  Click on your preferred OpenAPI tool to view the specifications:
 </p>
 
 - #### [SwaggerUI](https://vendor-api-stg.anybill.de/index.html)

@@ -4,7 +4,7 @@ This document describes the usage of the anybill vendor REST API.
 ## Environments
 There are currently two public environments:
 
-### Production: `https://vendor.anybill.de`
+### Production: `https://vendor-api.anybill.de`
 This environment is for production use.
 
 ### Staging: `https://vendor-api-stg.anybill.de`
@@ -12,7 +12,8 @@ This environment is for integration testing.
 
 ## Bill API
 <p>
-  To add a bill to a anybill user, <b>only</b> the post bill endpoint has to be implemented.
+  With this Endpoint you can add a Bill to the anybill API.
+  For this, the respective store from which the receipt is to be issued must already have been added via the Store API.
 </p>
 <p>
   Please check out the OpenAPI specifications for more information.
@@ -21,7 +22,7 @@ This environment is for integration testing.
 ## Store API
 <p>
   With these Endpoints the Stores of an Vendor can be managed.
-  This can also be done on the anybill Partner Portal so implementing these Endpoints is not required.
+  This can also be done on the anybill Partner Portal.
 </p>
 <p>
   Please check out the OpenAPI specifications for more information.

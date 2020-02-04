@@ -28,10 +28,10 @@ Values for quantityType and tenderTypeId can be the integer value or the string 
 - CubicMeters | 6
 
 > Example:<br>
-> QuantityType: "Count"
+> qantityType: "Count"
 
 > Example 2:<br>
-> QuantityType: 3
+> quantityType: 3
 
 
 ### Possible tenderTypeId values:

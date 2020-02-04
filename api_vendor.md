@@ -16,9 +16,9 @@ This environment is for integration testing.
   For this, the respective store from which the receipt is to be issued must already have been added via the Store API.
 </p>
 <p>
-Values for quantity type and tender type can be the integer value or the string equivalent.
+Values for quantityType and tenderTypeId can be the integer value or the string equivalent.
 
-Possible values for quantity type
+### Possible quantityType values
 - Count | 0
 - Kilogram | 1
 - Lbs | 2
@@ -27,8 +27,14 @@ Possible values for quantity type
 - Liter | 5
 - CubicMeters | 6
 
+> Example:<br>
+> QuantityType: "Count"
 
-Possible values for tender type
+> Example 2:<br>
+> QuantityType: 3
+
+
+### Possible tenderTypeId values:
 - CASH | 0
 - VISA | 1
 - MASTERCARD | 2
@@ -40,6 +46,19 @@ Possible values for tender type
 - APPLE_PAY | 8
 - GOOGLE_PAY | 9
 - AMAZON_PAY | 10
+
+> Example:<br>
+> tenderTypeId: "PAYPAL"
+
+> Example 2:<br>
+> tenderTypeId: 8
+
+### Possible currencyCode values:
+[Currency codes (ISO 4217)](https://www2.1010data.com/documentationcenter/prime/1010dataUsersGuide/DataTypesAndFormats/currencyUnitCodes.html)
+
+> Example:<br>
+> tenderTypeId: "EUR"
+
 </p>
 <p>
   Please check out the OpenAPI specifications for more information.

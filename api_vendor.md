@@ -16,6 +16,32 @@ This environment is for integration testing.
   For this, the respective store from which the receipt is to be issued must already have been added via the Store API.
 </p>
 <p>
+Values for quantity type and tender type can be the integer value or the string equivalent.
+
+Possible values for quantity type
+- Count | 0
+- Kilogram | 1
+- Lbs | 2
+- Meters | 3
+- Inches | 4
+- Liter | 5
+- CubicMeters | 6
+
+
+Possible values for tender type
+- CASH | 0
+- VISA | 1
+- MASTERCARD | 2
+- AMERICAN_EXPRESS | 3
+- DISCOVER | 4
+- JCB | 5
+- DEBITCARD | 6
+- PAYPAL | 7
+- APPLE_PAY | 8
+- GOOGLE_PAY | 9
+- AMAZON_PAY | 10
+</p>
+<p>
   Please check out the OpenAPI specifications for more information.
 </p>
 
@@ -61,6 +87,12 @@ After your credentials are set, send a request with the `GetToken` request. The 
 
 ## Changelog
 Changes to the anybill API will be documented here.
+
+### 2020-02-04
+
+Bill endpoint:
+- Quantity can now be of type double
+- QuantityType added
 
 ### 2019-12-14
 Initial documented pre release.

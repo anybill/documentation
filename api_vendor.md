@@ -57,7 +57,7 @@ Values for quantityType and tenderTypeId can be the integer value or the string 
 [Currency codes (ISO 4217)](https://www2.1010data.com/documentationcenter/prime/1010dataUsersGuide/DataTypesAndFormats/currencyUnitCodes.html)
 
 > Example:<br>
-> tenderTypeId: "EUR"
+> currencyCode: "EUR"
 
 </p>
 <p>
@@ -108,7 +108,6 @@ After your credentials are set, send a request with the `GetToken` request. The 
 Changes to the anybill API will be documented here.
 
 ### 2020-02-04
-
 Bill endpoint:
 - Quantity can now be of type double
 - QuantityType added

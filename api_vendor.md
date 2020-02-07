@@ -5,12 +5,18 @@ This document describes the usage of the anybill vendor REST API.
 There are currently two public environments:
 
 ### Production: `https://vendor-api.anybill.de`
-This environment is for production use.
+This environment is for production use.<br>
+<b>OpenAPI Specifications:</b><br>
+[SwaggerUI](https://vendor-api.anybill.de/index.html)
+
 
 ### Staging: `https://vendor-api-stg.anybill.de`
-This environment is for integration testing.
+This environment is for integration testing.<br>
+<b>OpenAPI Specifications:</b><br>
+[SwaggerUI](https://vendor-api.anybill.de/index.html)
 
-## Bill API
+
+# Bill API
 <p>
   With this Endpoint you can add a Bill to the anybill API.
   For this, the respective store from which the receipt is to be issued must already have been added via the Store API.
@@ -125,10 +131,10 @@ Possible Values for priceModifier:
 
 ### OpenAPI Specifications:
 
-#### Production:
-#### [SwaggerUI](https://vendor-api.anybill.de/index.html)
+<b>Production API:</b><br>
+[SwaggerUI](https://vendor-api.anybill.de/index.html)
 
-#### Staging:
+<b>Staging API:</b><br>
 #### [SwaggerUI](https://vendor-api-stg.anybill.de/index.html)
 
 
@@ -137,31 +143,31 @@ Possible Values for priceModifier:
   With these Endpoints the Stores of an Vendor can be managed.
   This can also be done on the anybill Partner Portal.
 </p>
-<p>
-  Please check out the OpenAPI specifications for more information.
-</p>
+
+### OpenAPI Specifications:
+
+<b>Production API:</b><br>
+[SwaggerUI](https://vendor-api.anybill.de/index.html)
+
+<b>Staging API:</b><br>
+[SwaggerUI](https://vendor-api-stg.anybill.de/index.html)
+
 
 ## Category API
 <p>
   This endpoint lists all categories which are available to categorize the line items and the bill.
 </p>
-<p>
-  Please check out the OpenAPI specifications for more information.
-</p>
 
-## OpenAPI Specification
-<p>
-  Here you can find the complete OpenAPI Specifications for the Vendor API.
-</p>
-<p>
-  Click on your preferred OpenAPI tool to view the specifications:
-</p>
+### OpenAPI Specifications:
 
-- #### [SwaggerUI](https://vendor-api-stg.anybill.de/index.html)
-- #### [ReDoc](https://redocly.github.io/redoc/?url=https://vendor-api-stg.anybill.de/swagger/v1/swagger.json)
-- #### [Raw OpenAPI Json File](https://vendor-api-stg.anybill.de/swagger/v1/swagger.json)
+<b>Production API:</b><br>
+[SwaggerUI](https://vendor-api.anybill.de/index.html)
 
-## Postman
+<b>Staging API:</b><br>
+[SwaggerUI](https://vendor-api-stg.anybill.de/index.html)
+
+
+# Postman
 A Postman collection can be found [here](./Postman/Anybill%20Vendor%20Api.postman_collection.json).
 There are also Environments for [Staging](./Postman/Environments/Anybill%20VendorApi%20Staging.postman_environment.json) and [Production](./Postman/Environments/Anybill%20VendorApi%20Production.postman_environment.json)
 

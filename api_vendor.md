@@ -135,7 +135,7 @@ Possible Values for priceModifier:
 [SwaggerUI](https://vendor-api.anybill.de/index.html)
 
 <b>Staging API:</b><br>
-#### [SwaggerUI](https://vendor-api-stg.anybill.de/index.html)
+[SwaggerUI](https://vendor-api-stg.anybill.de/index.html)
 
 
 ## Store API
@@ -178,7 +178,7 @@ To acquire an access_token first set your credentials for the following collecti
 
 After your credentials are set, send a request with the `GetToken` request. The acquired access token will automatically be set for all requests in the collection. Choose the environment and you are good to go. 
 
-## Changelog
+# Changelog
 Changes to the anybill API will be documented here.
 
 ### 2020-02-04

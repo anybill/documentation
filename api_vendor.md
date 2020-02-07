@@ -100,6 +100,28 @@ Possible Values for priceModifier:
   </tr>
 </table>
 
+> Example:<br>
+> originalPrice: 100.0<br>
+> pricePaid: 80.0<br>
+> priceModifier: 1<br>
+>
+> => an Discount of 20% is applied to this Line Item
+
+
+> Example 2:<br>
+> originalPrice: 2.99<br>
+> pricePaid: 2.39<br>
+> priceModifier: 2<br>
+>
+> => an Discount of 0.30 is applied to this Line Item
+
+> Example 3:<br>
+> originalPrice: 14.99<br>
+> pricePaid: 9.99<br>
+> priceModifier: 3<br>
+>
+> => the Price of Line Item is reduced from 14.99 to 9.99
+
 </p>
 <p>
   Please check out the OpenAPI specifications for more information.

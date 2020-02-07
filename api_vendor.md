@@ -59,7 +59,7 @@ Values for quantityType and tenderTypeId can be the integer value or the string 
 > Example:<br>
 > currencyCode: "EUR"
 
-### Display an Discount
+### Display an Discount:
 A Discount can be set to each LineItem Individually with the Properties originalPrice, pricePaid and priceModifier.<br>
 By providing these Parameters the applied Discount gets calculated automatically.
 
@@ -121,11 +121,16 @@ Possible Values for priceModifier:
 > priceModifier: 3<br>
 >
 > => the Price of Line Item is reduced from 14.99 to 9.99
+</p>
 
-</p>
-<p>
-  Please check out the OpenAPI specifications for more information.
-</p>
+### OpenAPI Specifications:
+
+#### Production:
+#### [SwaggerUI](https://vendor-api.anybill.de/index.html)
+
+#### Staging:
+#### [SwaggerUI](https://vendor-api-stg.anybill.de/index.html)
+
 
 ## Store API
 <p>

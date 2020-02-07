@@ -88,18 +88,16 @@ Possible Values for priceModifier:
     <td>Mondetary</td>  
     <td>2</td>
     <td>
-      A Discount of a specific Value gets applied e.g. 5€ voucher
+      The Line Item price is reduced by a certain Amount e.g. -2€
     </td>
   </tr>
-  <!--
   <tr>
     <td>Mondetary Replacement</td>  
     <td>3</td>
     <td>
-      .
+      The Line Item price is reduced to a certain Price e.g. costs 3€ instead of 4€
     </td>
   </tr>
--->
 </table>
 
 </p>

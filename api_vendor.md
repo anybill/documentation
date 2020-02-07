@@ -59,6 +59,49 @@ Values for quantityType and tenderTypeId can be the integer value or the string 
 > Example:<br>
 > currencyCode: "EUR"
 
+### Display an Discount
+A Discount can be set to each LineItem Individually with the Properties originalPrice, pricePaid and priceModifier.<br>
+By providing these Parameters the applied Discount gets calculated automatically.
+
+Possible Values for priceModifier:
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Value</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>None (default)</td>  
+    <td>0</td>
+    <td>
+      No Discount gets applied
+    </td>
+  </tr>
+  <tr>
+    <td>Percentage</td>  
+    <td>1</td>
+    <td>
+      A Discount of a specific percentage gets applied
+    </td>
+  </tr>
+  <tr>
+    <td>Mondetary</td>  
+    <td>2</td>
+    <td>
+      A Discount of a specific Value gets applied e.g. 5€ voucher
+    </td>
+  </tr>
+  <!--
+  <tr>
+    <td>Mondetary Replacement</td>  
+    <td>3</td>
+    <td>
+      .
+    </td>
+  </tr>
+-->
+</table>
+
 </p>
 <p>
   Please check out the OpenAPI specifications for more information.

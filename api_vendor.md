@@ -85,14 +85,14 @@ Possible Values for priceModifier:
     </td>
   </tr>
   <tr>
-    <td>Mondetary</td>  
+    <td>Monetary</td>  
     <td>2</td>
     <td>
       The Line Item price is reduced by a certain Amount e.g. -2€
     </td>
   </tr>
   <tr>
-    <td>Mondetary Replacement</td>  
+    <td>Monetary Replacement</td>  
     <td>3</td>
     <td>
       The Line Item price is reduced to a certain Price e.g. costs 3€ instead of 4€

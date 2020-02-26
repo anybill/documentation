@@ -117,7 +117,7 @@
         "tags": [
           "Bill"
         ],
-        "summary": "Adds a receipt for the given user to the System.",
+        "summary": "Adds an anonymous receipt for the to the System.",
         "requestBody": {
           "description": "A dto containing the store id, the bill should be added to, and the receipt with its line items.",
           "content": {
@@ -146,11 +146,11 @@
         },
         "responses": {
           "200": {
-            "description": "Returns a url to the created bill on success.",
+            "description": "Returns information about the created bill on success.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/AnonymousBillResponseDto"
                 }
               }
             }
@@ -928,21 +928,9 @@
         "format": "int32"
       },
       "PaymentDetailsDto": {
-        "required": [
-          "$type"
-        ],
         "type": "object",
-        "properties": {
-          "$type": {
-            "type": "string",
-            "default": "PaymentDetailsDto"
-          }
-        },
         "additionalProperties": false,
-        "description": "Additional payment details.",
-        "discriminator": {
-          "propertyName": "$type"
-        }
+        "description": "Additional payment details."
       },
       "TenderDto": {
         "required": [
@@ -1154,6 +1142,18 @@
           "type": "object",
           "additionalProperties": false
         }
+      },
+      "AnonymousBillResponseDto": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "URL to the generated bill to encode in the QR-Code.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Information about the generated bill."
       },
       "CategoryDto": {
         "type": "object",
@@ -1429,11 +1429,7 @@
           }
         ],
         "additionalProperties": false,
-        "description": "Additional optional payment details about the bank transfer tender type.",
-        "discriminator": {
-          "propertyName": "$type"
-        },
-        "x-ms-discriminator-value": "Anybill.VendorApi.Models.DTO.V2.Bill.PaymentDetails.BankTransferPaymentDetailsDto, Anybill.VendorApi"
+        "description": "Additional optional payment details about the bank transfer tender type."
       },
       "CashPaymentDetailsDto": {
         "type": "object",
@@ -1458,11 +1454,7 @@
           }
         ],
         "additionalProperties": false,
-        "description": "Additional optional payment details about the cash tender type.",
-        "discriminator": {
-          "propertyName": "$type"
-        },
-        "x-ms-discriminator-value": "Anybill.VendorApi.Models.DTO.V2.Bill.PaymentDetails.CashPaymentDetailsDto, Anybill.VendorApi"
+        "description": "Additional optional payment details about the cash tender type."
       },
       "CheckPaymentDetailsDto": {
         "type": "object",
@@ -1502,11 +1494,7 @@
           }
         ],
         "additionalProperties": false,
-        "description": "Additional optional payment details about the check tender type.",
-        "discriminator": {
-          "propertyName": "$type"
-        },
-        "x-ms-discriminator-value": "Anybill.VendorApi.Models.DTO.V2.Bill.PaymentDetails.CheckPaymentDetailsDto, Anybill.VendorApi"
+        "description": "Additional optional payment details about the check tender type."
       },
       "CreditCardPaymentDetailsDto": {
         "type": "object",
@@ -1529,11 +1517,7 @@
           }
         ],
         "additionalProperties": false,
-        "description": "Additional optional payment details about the credit card tender type.",
-        "discriminator": {
-          "propertyName": "$type"
-        },
-        "x-ms-discriminator-value": "Anybill.VendorApi.Models.DTO.V2.Bill.PaymentDetails.CreditCardPaymentDetailsDto, Anybill.VendorApi"
+        "description": "Additional optional payment details about the credit card tender type."
       },
       "DirectDebitPaymentDetailsDto": {
         "type": "object",
@@ -1556,11 +1540,7 @@
           }
         ],
         "additionalProperties": false,
-        "description": "Additional optional payment details about the direct debit tender type.",
-        "discriminator": {
-          "propertyName": "$type"
-        },
-        "x-ms-discriminator-value": "Anybill.VendorApi.Models.DTO.V2.Bill.PaymentDetails.DirectDebitPaymentDetailsDto, Anybill.VendorApi"
+        "description": "Additional optional payment details about the direct debit tender type."
       },
       "GiftCardPaymentDetailsDto": {
         "type": "object",
@@ -1590,11 +1570,7 @@
           }
         ],
         "additionalProperties": false,
-        "description": "Additional optional payment details about the gift card tender type.",
-        "discriminator": {
-          "propertyName": "$type"
-        },
-        "x-ms-discriminator-value": "Anybill.VendorApi.Models.DTO.V2.Bill.PaymentDetails.GiftCardPaymentDetailsDto, Anybill.VendorApi"
+        "description": "Additional optional payment details about the gift card tender type."
       },
       "LoyaltyCardPaymentDetailsDto": {
         "type": "object",
@@ -1628,11 +1604,7 @@
           }
         ],
         "additionalProperties": false,
-        "description": "Additional optional payment details about the loyalty card tender type.",
-        "discriminator": {
-          "propertyName": "$type"
-        },
-        "x-ms-discriminator-value": "Anybill.VendorApi.Models.DTO.V2.Bill.PaymentDetails.LoyaltyCardPaymentDetailsDto, Anybill.VendorApi"
+        "description": "Additional optional payment details about the loyalty card tender type."
       },
       "OnlinePaymentDetailsDto": {
         "type": "object",
@@ -1659,11 +1631,7 @@
           }
         ],
         "additionalProperties": false,
-        "description": "Additional optional payment details about the online payment tender type.",
-        "discriminator": {
-          "propertyName": "$type"
-        },
-        "x-ms-discriminator-value": "Anybill.VendorApi.Models.DTO.V2.Bill.PaymentDetails.OnlinePaymentDetailsDto, Anybill.VendorApi"
+        "description": "Additional optional payment details about the online payment tender type."
       }
     },
     "securitySchemes": {

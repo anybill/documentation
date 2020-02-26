@@ -1,0 +1,1683 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Anybill Vendor API 2.0",
+    "description": "Api for the Anybill service for vendors.",
+    "contact": {
+      "name": "Patrick Göttler",
+      "url": "https://anybill.de/",
+      "email": "patrick.goettler@anybill.de"
+    },
+    "version": "2.0"
+  },
+  "paths": {
+    "/api/v2/bill/user/{userId}": {
+      "post": {
+        "tags": [
+          "Bill"
+        ],
+        "summary": "Adds a receipt for the given user to the System.",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The id of the user whom the bill should be added to.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "A dto containing the store id, the bill should be added to, and the receipt with its line items.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddBillDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddBillDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddBillDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddBillDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Returns on success."
+          },
+          "400": {
+            "description": "Returns if the data is invalid or an error occurred.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns if the user could not be authenticated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returns if the access token is missing the right scope or user permissions are missing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns if the user or store was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Returns if an unexpected error occurred.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/bill": {
+      "post": {
+        "tags": [
+          "Bill"
+        ],
+        "summary": "Adds a receipt for the given user to the System.",
+        "requestBody": {
+          "description": "A dto containing the store id, the bill should be added to, and the receipt with its line items.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddBillDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddBillDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddBillDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddBillDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Returns a url to the created bill on success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Returns if the data is invalid or an error occurred.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns if the user could not be authenticated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returns if the access token is missing the right scope or user permissions are missing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns if the store was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Returns if an unexpected error occurred.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/category": {
+      "get": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Lists all categories.",
+        "responses": {
+          "200": {
+            "description": "Returns on success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoryDto"
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Returns if no categories were found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns if the user could not be authenticated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returns if the access token is missing the right scope or user permissions are missing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Returns if an unexpected error occurred.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/category/{id}": {
+      "get": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Gets the category with the given id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the category.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns on success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns if the user could not be authenticated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returns if the access token is missing the right scope or user permissions are missing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns if the category was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Returns if an unexpected error occurred.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/store": {
+      "get": {
+        "tags": [
+          "Store"
+        ],
+        "summary": "Lists all stores.",
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Elements to skip for pagination.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "How much elements to take for pagination.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 100
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns on success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StoreDto"
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Returns if no stores could be found."
+          },
+          "401": {
+            "description": "Returns if the user could not be authenticated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returns if the access token is missing the right scope or user permissions are missing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Returns if an unexpected error occurred.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Store"
+        ],
+        "summary": "Creates or updates the store. The valid from datetime will be set to the current timestamp if null or in the past.",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertStoreDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertStoreDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertStoreDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertStoreDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Returns if the store was updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StoreDto"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Returns if the store was created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StoreDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Returns if model validation, add or update failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns if the user could not be authenticated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returns if the access token is missing the right scope or user permissions are missing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Returns if an unexpected error occurred.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/store/{id}": {
+      "get": {
+        "tags": [
+          "Store"
+        ],
+        "summary": "Gets the store with the given id.",
+        "operationId": "GetStoreV2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the store.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns on success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StoreDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns if the user could not be authenticated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returns if the access token is missing the right scope or user permissions are missing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns if the store was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Returns if an unexpected error occurred.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Store"
+        ],
+        "summary": "Deletes the store with the given id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the store.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "upUntilValidFrom",
+            "in": "query",
+            "description": "The datetime up until the store history should be deleted.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Returns on success."
+          },
+          "400": {
+            "description": "Returns if the store could not be deleted.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns if the user could not be authenticated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returns if the access token is missing the right scope or user permissions are missing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns if the store could not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Returns if an unexpected error occurred.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/store/{id}/history": {
+      "get": {
+        "tags": [
+          "Store"
+        ],
+        "summary": "Gets the history of the store with the given id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the store.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns on success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StoreHistoryDto"
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Returns if no data was found."
+          },
+          "401": {
+            "description": "Returns if the user could not be authenticated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returns if the access token is missing the right scope or user permissions are missing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Returns if an unexpected error occurred.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "QuantityTypeDto": {
+        "enum": [
+          "Count",
+          "Kilogram",
+          "Lbs",
+          "Meters",
+          "Inches",
+          "Liter",
+          "CubicMeters",
+          "SquareMeters"
+        ],
+        "type": "string",
+        "format": "int32"
+      },
+      "PriceModifierDto": {
+        "enum": [
+          "None",
+          "Percentage",
+          "Monetary",
+          "MonetaryReplacement"
+        ],
+        "type": "string",
+        "description": "Price modifier applied to line item.",
+        "format": "int32"
+      },
+      "ReturnDto": {
+        "required": [
+          "date",
+          "quantity"
+        ],
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "The date and time when the return took place. This should be in the correct ISO 8601 format to represent the correct timezone.",
+            "format": "date-time"
+          },
+          "quantity": {
+            "type": "number",
+            "description": "The quantity of the line item that was returned at the given date and time.",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents the return of a line item."
+      },
+      "LineItemDto": {
+        "required": [
+          "name",
+          "quantity",
+          "quantityType",
+          "sequenceNumber",
+          "unitGrossPrice",
+          "vat",
+          "vatAmount"
+        ],
+        "type": "object",
+        "properties": {
+          "quantityType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QuantityTypeDto"
+              }
+            ],
+            "description": "The type of quantity."
+          },
+          "quantity": {
+            "type": "number",
+            "description": "The quantity of the line item.",
+            "format": "double"
+          },
+          "unitGrossPrice": {
+            "type": "number",
+            "description": "The gross price that was paid for this line item per unit.",
+            "format": "double"
+          },
+          "unitNetPrice": {
+            "type": "number",
+            "description": "The unit net price per item.",
+            "format": "double",
+            "nullable": true
+          },
+          "totalNetPrice": {
+            "type": "number",
+            "description": "Total net price.",
+            "format": "double",
+            "nullable": true
+          },
+          "totalGrossPrice": {
+            "type": "number",
+            "description": "Total gross price.",
+            "format": "double",
+            "nullable": true
+          },
+          "unitOriginalGrossPrice": {
+            "type": "number",
+            "description": "The original price before discounts that would have been called per unit.",
+            "format": "double",
+            "nullable": true
+          },
+          "discountValue": {
+            "type": "number",
+            "description": "The amount by which the item was reduced.",
+            "format": "double",
+            "nullable": true
+          },
+          "priceModifier": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PriceModifierDto"
+              }
+            ],
+            "description": "The kind of price modifier that was applied to this line item.",
+            "nullable": true
+          },
+          "vatAmount": {
+            "type": "number",
+            "description": "Total vat amount.",
+            "format": "double"
+          },
+          "vat": {
+            "maximum": 100,
+            "minimum": 0,
+            "type": "number",
+            "description": "The percentage of vat. e.g. 19",
+            "format": "double"
+          },
+          "text": {
+            "maxLength": 256,
+            "type": "string",
+            "description": "Additional text that should be displayed with the line item.",
+            "nullable": true
+          },
+          "sequenceNumber": {
+            "type": "integer",
+            "description": "The sequence number of the line items. Needed to display the correct order.",
+            "format": "int32"
+          },
+          "name": {
+            "maxLength": 256,
+            "type": "string",
+            "description": "Name of the article."
+          },
+          "description": {
+            "maxLength": 1024,
+            "type": "string",
+            "description": "Description of the article.",
+            "nullable": true
+          },
+          "ean": {
+            "maxLength": 128,
+            "type": "string",
+            "description": "Ean of the article.",
+            "nullable": true
+          },
+          "categoryId": {
+            "type": "string",
+            "description": "The id of the category the article belongs to.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "returns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReturnDto"
+            },
+            "description": "The",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents one line item of a bill."
+      },
+      "TenderTypeDto": {
+        "enum": [
+          "Miscellaneous",
+          "Cash",
+          "DirectDebit",
+          "CreditCard",
+          "OnlinePayment",
+          "GiftCard",
+          "BankTransfer",
+          "Check",
+          "LoyaltyCard"
+        ],
+        "type": "string",
+        "description": "The general type of the legal tender used.",
+        "format": "int32"
+      },
+      "PaymentDetailsDto": {
+        "required": [
+          "$type"
+        ],
+        "type": "object",
+        "properties": {
+          "$type": {
+            "type": "string",
+            "default": "PaymentDetailsDto"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Additional payment details.",
+        "discriminator": {
+          "propertyName": "$type"
+        }
+      },
+      "TenderDto": {
+        "required": [
+          "amount",
+          "currencyCode",
+          "detailedType",
+          "tenderType"
+        ],
+        "type": "object",
+        "properties": {
+          "tenderType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TenderTypeDto"
+              }
+            ],
+            "description": "The type of tender used."
+          },
+          "detailedType": {
+            "maxLength": 48,
+            "type": "string",
+            "description": "The detailed tender type used. E.g. Visa for credit card tender."
+          },
+          "currencyCode": {
+            "maxLength": 3,
+            "minLength": 3,
+            "type": "string",
+            "description": "Currency code as of ISO 4217."
+          },
+          "amount": {
+            "type": "number",
+            "description": "The amount paid with this tender.",
+            "format": "double"
+          },
+          "paymentDetails": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaymentDetailsDto"
+              }
+            ],
+            "description": "Additional payment details for this tender.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The legal tender used in the transaction."
+      },
+      "LegalInformationDto": {
+        "required": [
+          "beginDateTime",
+          "endDateTime",
+          "securityModuleNumber",
+          "transactionId"
+        ],
+        "type": "object",
+        "properties": {
+          "beginDateTime": {
+            "type": "string",
+            "description": "The date time of the start of the transaction. This should be in the correct ISO 8601 format to represent the correct timezone.",
+            "format": "date-time"
+          },
+          "endDateTime": {
+            "type": "string",
+            "description": "The date time of the end of the transaction. This should be in the correct ISO 8601 format to represent the correct timezone.",
+            "format": "date-time"
+          },
+          "securityModuleNumber": {
+            "maxLength": 1024,
+            "type": "string",
+            "description": "Number of the security module of the cashbox."
+          },
+          "transactionId": {
+            "maxLength": 512,
+            "type": "string",
+            "description": "Identifier for this transaction in the vendors system. Usually represented in form of a barcode on the receipt."
+          }
+        },
+        "additionalProperties": false,
+        "description": "The additional legal information needed to fulfill the standards given by the law."
+      },
+      "BillDto": {
+        "required": [
+          "date",
+          "legalInformation",
+          "lineItems",
+          "tenders",
+          "totalGrossAmount",
+          "totalTaxAmount"
+        ],
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "Date and time of the transaction. This should be in the correct ISO 8601 format to represent the correct timezone.",
+            "format": "date-time"
+          },
+          "customText": {
+            "maxLength": 2048,
+            "type": "string",
+            "description": "Custom text the vendor might want to add to his receipts.",
+            "nullable": true
+          },
+          "lineItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LineItemDto"
+            },
+            "description": "A collection of the invoice line items of this transaction."
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "A collection of categories. Can be assigned by the vendor.",
+            "nullable": true
+          },
+          "tenders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TenderDto"
+            },
+            "description": "Tender data."
+          },
+          "totalGrossAmount": {
+            "type": "number",
+            "description": "Total gross amount the user paid.",
+            "format": "double"
+          },
+          "totalNetAmount": {
+            "type": "number",
+            "description": "Total net amount.",
+            "format": "double",
+            "nullable": true
+          },
+          "totalTaxAmount": {
+            "type": "number",
+            "description": "Total amount of tax paid.",
+            "format": "double"
+          },
+          "currencyCode": {
+            "maxLength": 3,
+            "minLength": 3,
+            "type": "string",
+            "description": "Currency code as of ISO 4217.",
+            "nullable": true
+          },
+          "legalInformation": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LegalInformationDto"
+              }
+            ],
+            "description": "Legal information needed."
+          }
+        },
+        "additionalProperties": false,
+        "description": "The bill object that represents the entire transaction."
+      },
+      "AddBillDto": {
+        "required": [
+          "bill",
+          "storeId"
+        ],
+        "type": "object",
+        "properties": {
+          "storeId": {
+            "type": "string",
+            "description": "The id of the store of the vendor in which the transaction was done."
+          },
+          "bill": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BillDto"
+              }
+            ],
+            "description": "The object representing the bill."
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": {
+          "type": "object",
+          "additionalProperties": false
+        }
+      },
+      "CategoryDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddressDto": {
+        "required": [
+          "city",
+          "country",
+          "number",
+          "street",
+          "zip"
+        ],
+        "type": "object",
+        "properties": {
+          "country": {
+            "maxLength": 150,
+            "type": "string"
+          },
+          "zip": {
+            "maxLength": 12,
+            "type": "string"
+          },
+          "city": {
+            "maxLength": 150,
+            "type": "string"
+          },
+          "street": {
+            "maxLength": 150,
+            "type": "string"
+          },
+          "number": {
+            "maxLength": 150,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "StoreDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "legalName": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AddressDto"
+              }
+            ],
+            "nullable": true
+          },
+          "vatId": {
+            "type": "string",
+            "nullable": true
+          },
+          "googlePlacesId": {
+            "type": "string",
+            "nullable": true
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpsertStoreDto": {
+        "required": [
+          "address",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "maxLength": 10,
+            "type": "string"
+          },
+          "displayName": {
+            "maxLength": 64,
+            "type": "string",
+            "nullable": true
+          },
+          "legalName": {
+            "maxLength": 128,
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AddressDto"
+              }
+            ]
+          },
+          "vatId": {
+            "maxLength": 24,
+            "type": "string",
+            "nullable": true
+          },
+          "googlePlacesId": {
+            "maxLength": 512,
+            "type": "string",
+            "nullable": true
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StoreHistoryDto": {
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "legalName": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AddressDto"
+              }
+            ],
+            "nullable": true
+          },
+          "vatId": {
+            "type": "string",
+            "nullable": true
+          },
+          "googlePlacesId": {
+            "type": "string",
+            "nullable": true
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ValidationProblemDetails": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": {
+          "type": "object",
+          "additionalProperties": false
+        }
+      },
+      "BankTransferPaymentDetailsDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PaymentDetailsDto"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "purposeOfUsage": {
+                "type": "string",
+                "nullable": true
+              },
+              "iban": {
+                "type": "string",
+                "nullable": true
+              },
+              "bic": {
+                "type": "string",
+                "nullable": true
+              },
+              "accountHolderName": {
+                "type": "string",
+                "nullable": true
+              },
+              "accountNumber": {
+                "type": "string",
+                "nullable": true
+              },
+              "bankName": {
+                "type": "string",
+                "nullable": true
+              },
+              "bankAddress": {
+                "type": "string",
+                "nullable": true
+              },
+              "sortCode": {
+                "type": "string",
+                "nullable": true
+              },
+              "routingNumber": {
+                "type": "string",
+                "nullable": true
+              },
+              "ifscCode": {
+                "type": "string",
+                "nullable": true
+              },
+              "routingCode": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          }
+        ],
+        "additionalProperties": false,
+        "description": "Additional optional payment details about the bank transfer tender type.",
+        "discriminator": {
+          "propertyName": "$type"
+        },
+        "x-ms-discriminator-value": "Anybill.VendorApi.Models.DTO.V2.Bill.PaymentDetails.BankTransferPaymentDetailsDto, Anybill.VendorApi"
+      },
+      "CashPaymentDetailsDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PaymentDetailsDto"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "amountGiven": {
+                "type": "number",
+                "format": "double",
+                "nullable": true
+              },
+              "amountReturned": {
+                "type": "number",
+                "format": "double",
+                "nullable": true
+              }
+            }
+          }
+        ],
+        "additionalProperties": false,
+        "description": "Additional optional payment details about the cash tender type.",
+        "discriminator": {
+          "propertyName": "$type"
+        },
+        "x-ms-discriminator-value": "Anybill.VendorApi.Models.DTO.V2.Bill.PaymentDetails.CashPaymentDetailsDto, Anybill.VendorApi"
+      },
+      "CheckPaymentDetailsDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PaymentDetailsDto"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "drawee": {
+                "type": "string",
+                "nullable": true
+              },
+              "payee": {
+                "type": "string",
+                "nullable": true
+              },
+              "dateOfIssue": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "drawer": {
+                "type": "string",
+                "nullable": true
+              },
+              "sortCode": {
+                "type": "string",
+                "nullable": true
+              },
+              "accountNumber": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          }
+        ],
+        "additionalProperties": false,
+        "description": "Additional optional payment details about the check tender type.",
+        "discriminator": {
+          "propertyName": "$type"
+        },
+        "x-ms-discriminator-value": "Anybill.VendorApi.Models.DTO.V2.Bill.PaymentDetails.CheckPaymentDetailsDto, Anybill.VendorApi"
+      },
+      "CreditCardPaymentDetailsDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PaymentDetailsDto"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "cardNumber": {
+                "type": "string",
+                "nullable": true
+              },
+              "bankName": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          }
+        ],
+        "additionalProperties": false,
+        "description": "Additional optional payment details about the credit card tender type.",
+        "discriminator": {
+          "propertyName": "$type"
+        },
+        "x-ms-discriminator-value": "Anybill.VendorApi.Models.DTO.V2.Bill.PaymentDetails.CreditCardPaymentDetailsDto, Anybill.VendorApi"
+      },
+      "DirectDebitPaymentDetailsDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PaymentDetailsDto"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "sepaCreditorId": {
+                "type": "string",
+                "nullable": true
+              },
+              "sepaMandateReference": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          }
+        ],
+        "additionalProperties": false,
+        "description": "Additional optional payment details about the direct debit tender type.",
+        "discriminator": {
+          "propertyName": "$type"
+        },
+        "x-ms-discriminator-value": "Anybill.VendorApi.Models.DTO.V2.Bill.PaymentDetails.DirectDebitPaymentDetailsDto, Anybill.VendorApi"
+      },
+      "GiftCardPaymentDetailsDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PaymentDetailsDto"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "initialAmount": {
+                "type": "number",
+                "format": "double",
+                "nullable": true
+              },
+              "restAmount": {
+                "type": "number",
+                "format": "double",
+                "nullable": true
+              },
+              "dateOfExpiry": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          }
+        ],
+        "additionalProperties": false,
+        "description": "Additional optional payment details about the gift card tender type.",
+        "discriminator": {
+          "propertyName": "$type"
+        },
+        "x-ms-discriminator-value": "Anybill.VendorApi.Models.DTO.V2.Bill.PaymentDetails.GiftCardPaymentDetailsDto, Anybill.VendorApi"
+      },
+      "LoyaltyCardPaymentDetailsDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PaymentDetailsDto"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "identifier": {
+                "type": "string",
+                "nullable": true
+              },
+              "pointsUsed": {
+                "type": "number",
+                "format": "double",
+                "nullable": true
+              },
+              "pointsLeft": {
+                "type": "number",
+                "format": "double",
+                "nullable": true
+              },
+              "pointsGained": {
+                "type": "number",
+                "format": "double",
+                "nullable": true
+              }
+            }
+          }
+        ],
+        "additionalProperties": false,
+        "description": "Additional optional payment details about the loyalty card tender type.",
+        "discriminator": {
+          "propertyName": "$type"
+        },
+        "x-ms-discriminator-value": "Anybill.VendorApi.Models.DTO.V2.Bill.PaymentDetails.LoyaltyCardPaymentDetailsDto, Anybill.VendorApi"
+      },
+      "OnlinePaymentDetailsDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PaymentDetailsDto"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "senderAccountName": {
+                "type": "string",
+                "nullable": true
+              },
+              "recipientAccountName": {
+                "type": "string",
+                "nullable": true
+              },
+              "transactionId": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          }
+        ],
+        "additionalProperties": false,
+        "description": "Additional optional payment details about the online payment tender type.",
+        "discriminator": {
+          "propertyName": "$type"
+        },
+        "x-ms-discriminator-value": "Anybill.VendorApi.Models.DTO.V2.Bill.PaymentDetails.OnlinePaymentDetailsDto, Anybill.VendorApi"
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "JWT Authorization header using the Bearer scheme. \\r\\n\\r\\n \r\n                      Enter 'Bearer' [space] and then your token in the text input below.\r\n                                  \\r\\n\\r\\nExample: 'Bearer {token}'",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}

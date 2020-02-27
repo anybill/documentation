@@ -17,7 +17,7 @@ For technical questions, feel free to contact us:<br>
 
 - [API Authentication](./api_authentication.md)
 - [Vendor API V1](./api_vendor.md)
-- [Vendor API V2](./api_vendor.md)
+- [Vendor API V2](./api_vendorV2.md)
 
 ### App Documentation
 

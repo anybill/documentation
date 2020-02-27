@@ -1,4 +1,4 @@
-# Vendor API
+# Vendor API V1
 This document describes the usage of the anybill vendor REST API.
 
 ## Environments
@@ -18,7 +18,7 @@ This environment is for integration testing.<br>
 
 # Bill API
 <p>
-  With this Endpoint you can add a Bill to the anybill API.
+  With this endpoint you can add a bill to the anybill API.
   For this, the respective store from which the receipt is to be issued must already have been added via the Store API.
 </p>
 <p>
@@ -32,6 +32,7 @@ Values for quantityType and tenderTypeId can be the integer value or the string 
 - Inches | 4
 - Liter | 5
 - CubicMeters | 6
+- SquareMeters | 7
 
 > Example:<br>
 > qantityType: "Count"
@@ -65,7 +66,7 @@ Values for quantityType and tenderTypeId can be the integer value or the string 
 > Example:<br>
 > currencyCode: "EUR"
 
-### Display an Discount:
+### Display a discount:
 A Discount can be set to each LineItem Individually with the Properties originalPrice, pricePaid and priceModifier.<br>
 By providing these Parameters the applied Discount gets calculated automatically.
 
@@ -111,7 +112,7 @@ Possible Values for priceModifier:
 > pricePaid: 80.0<br>
 > priceModifier: 1<br>
 >
-> => an Discount of 20% is applied to this Line Item
+> => a discount of 20% is applied to this line item
 
 
 > Example 2:<br>
@@ -119,14 +120,14 @@ Possible Values for priceModifier:
 > pricePaid: 2.39<br>
 > priceModifier: 2<br>
 >
-> => an Discount of 0.30 is applied to this Line Item
+> => a discount of 0.30 is applied to this line item
 
 > Example 3:<br>
 > originalPrice: 14.99<br>
 > pricePaid: 9.99<br>
 > priceModifier: 3<br>
 >
-> => the Price of Line Item is reduced from 14.99 to 9.99
+> => the price of this line item is reduced from 14.99 to 9.99
 </p>
 
 ### OpenAPI Specifications:
@@ -140,7 +141,7 @@ Possible Values for priceModifier:
 
 ## Store API
 <p>
-  With these Endpoints the Stores of an Vendor can be managed.
+  With these Endpoints the stores of an Vendor can be managed.
   This can also be done on the anybill Partner Portal.
 </p>
 

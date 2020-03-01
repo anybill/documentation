@@ -6,237 +6,2022 @@
 	},
 	"item": [
 		{
-			"name": "Store",
+			"name": "v1",
 			"item": [
 				{
-					"name": "Get stores",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/v1/store?",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"store"
-							],
-							"query": [
+					"name": "Store",
+					"item": [
+						{
+							"name": "Get stores",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/:version/store?",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										":version",
+										"store"
+									],
+									"query": [
+										{
+											"key": "skip",
+											"value": "0",
+											"description": "Elements to skip for pagination.",
+											"disabled": true
+										},
+										{
+											"key": "take",
+											"value": "100",
+											"description": "How much elements to take for pagination.",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "version",
+											"value": "v1",
+											"description": "API version"
+										}
+									]
+								},
+								"description": "Lists all stores."
+							},
+							"response": [
 								{
-									"key": "skip",
-									"value": "0",
-									"description": "Elements to skip for pagination.",
-									"disabled": true
+									"name": "Get stores example",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/:version/store?",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												":version",
+												"store"
+											],
+											"query": [
+												{
+													"key": "skip",
+													"value": "0",
+													"description": "Elements to skip for pagination.",
+													"disabled": true
+												},
+												{
+													"key": "take",
+													"value": "100",
+													"description": "How much elements to take for pagination.",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "version",
+													"value": "v1",
+													"description": "API version"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Length",
+											"value": "339"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=60; includeSubDomains; preload"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Mar 2020 11:50:51 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"id\": \"01234\",\n        \"shortName\": \"ReTech\",\n        \"longName\": \"Regensburg TechBase\",\n        \"address\": {\n            \"country\": \"Germany\",\n            \"zip\": \"93053\",\n            \"city\": \"Regensburg\",\n            \"street\": \"Franz-Mayer-Straße 1\",\n            \"number\": \"1\"\n        },\n        \"vatId\": \"DE 123 456 789\",\n        \"googlePlacesId\": null,\n        \"validFrom\": \"2020-02-07T14:00:12.2344235+01:00\"\n    }\n]"
+								}
+							]
+						},
+						{
+							"name": "Get store",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/:version/store/:storeId",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										":version",
+										"store",
+										":storeId"
+									],
+									"variable": [
+										{
+											"key": "version",
+											"value": "v1",
+											"description": "API version"
+										},
+										{
+											"key": "storeId",
+											"value": "",
+											"description": "Id of the store"
+										}
+									]
+								},
+								"description": "Gets the store with the given id."
+							},
+							"response": [
+								{
+									"name": "Get store 01234",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/:version/store/:storeId",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												":version",
+												"store",
+												":storeId"
+											],
+											"variable": [
+												{
+													"key": "version",
+													"value": "v1",
+													"description": "API version"
+												},
+												{
+													"key": "storeId",
+													"value": "01234",
+													"description": "Id of the store."
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Length",
+											"value": "259"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=60; includeSubDomains; preload"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Mar 2020 11:49:12 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": \"01234\",\n    \"shortName\": \"ReTech\",\n    \"longName\": \"Regensburg TechBase\",\n    \"address\": null,\n    \"vatId\": \"DE 123 456 789\",\n    \"googlePlacesId\": null,\n    \"validFrom\": \"2020-02-07T14:00:12.2344235+01:00\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Get store history",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/:version/store/:storeId/history",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										":version",
+										"store",
+										":storeId",
+										"history"
+									],
+									"variable": [
+										{
+											"key": "version",
+											"value": "v1",
+											"description": "API version"
+										},
+										{
+											"key": "storeId",
+											"value": "",
+											"description": "Id of the store"
+										}
+									]
+								},
+								"description": "Gets the history of the store with the given id."
+							},
+							"response": [
+								{
+									"name": "Get history of store \"01234\"",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/:version/store/:storeId/history",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												":version",
+												"store",
+												":storeId",
+												"history"
+											],
+											"variable": [
+												{
+													"key": "version",
+													"value": "v1",
+													"description": "API version"
+												},
+												{
+													"key": "storeId",
+													"value": "01234",
+													"description": "Id of the store."
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Length",
+											"value": "436"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Server",
+											"value": "Microsoft-IIS/10.0"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=60; includeSubDomains; preload"
+										},
+										{
+											"key": "api-supported-versions",
+											"value": "2.0"
+										},
+										{
+											"key": "api-deprecated-versions",
+											"value": "1.0"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "ASP.NET"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Mar 2020 11:57:54 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"createdAt\": \"2020-03-01T11:55:36.2257276+00:00\",\n        \"isDeleted\": false,\n        \"id\": \"01234\",\n        \"shortName\": \"ReTech Neu\",\n        \"longName\": \"Regensburg TechBase Neu\",\n        \"address\": {\n            \"country\": \"Germany\",\n            \"zip\": \"93053\",\n            \"city\": \"Regensburg\",\n            \"street\": \"Franz-Mayer-Straße 1\",\n            \"number\": \"1\"\n        },\n        \"vatId\": \"DE 123 456 789\",\n        \"googlePlacesId\": null,\n        \"validFrom\": \"2020-06-01T08:00:00+00:00\"\n    },\n    {\n        \"createdAt\": \"2020-02-07T14:00:12.4409794+01:00\",\n        \"isDeleted\": false,\n        \"id\": \"01234\",\n        \"shortName\": \"ReTech\",\n        \"longName\": \"Regensburg TechBase\",\n        \"address\": {\n            \"country\": \"Germany\",\n            \"zip\": \"93053\",\n            \"city\": \"Regensburg\",\n            \"street\": \"Franz-Mayer-Straße 1\",\n            \"number\": \"1\"\n        },\n        \"vatId\": \"DE 123 456 789\",\n        \"googlePlacesId\": null,\n        \"validFrom\": \"2020-02-07T14:00:12.2344235+01:00\"\n    }\n]"
+								}
+							]
+						},
+						{
+							"name": "Upsert store",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"Id\": \"01234\",\n    \"ShortName\": \"ReTech\",\n    \"LongName\": \"Regensburg TechBase\",\n    \"Address\": {\n        \"Country\": \"Germany\",\n        \"Zip\": \"93053\",\n        \"City\": \"Regensburg\",\n        \"Street\": \"Franz-Mayer-Straße 1\",\n        \"Number\": \"1\"\n    },\n    \"VatId\": \"DE 123 456 789\",\n    \"ValidFrom\": \"2020-06-01T08:00:00.000Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/:version/store",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										":version",
+										"store"
+									],
+									"variable": [
+										{
+											"key": "version",
+											"value": "v1",
+											"description": "API version"
+										}
+									]
+								},
+								"description": "Creates or updates the store. The valid from datetime will be set to the current timestamp if null or in the past."
+							},
+							"response": [
+								{
+									"name": "Update store \"01234\"",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Id\": \"01234\",\n    \"ShortName\": \"ReTech Neu\",\n    \"LongName\": \"Regensburg TechBase Neu\",\n    \"Address\": {\n        \"Country\": \"Germany\",\n        \"Zip\": \"93053\",\n        \"City\": \"Regensburg\",\n        \"Street\": \"Franz-Mayer-Straße 1\",\n        \"Number\": \"1\"\n    },\n    \"VatId\": \"DE 123 456 789\",\n    \"ValidFrom\": \"2020-06-01T08:00:00.000Z\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/api/:version/store",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												":version",
+												"store"
+											],
+											"variable": [
+												{
+													"key": "version",
+													"value": "v1",
+													"description": "API version"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Length",
+											"value": "330"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=60; includeSubDomains; preload"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Mar 2020 11:55:36 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": \"01234\",\n    \"shortName\": \"ReTech Neu\",\n    \"longName\": \"Regensburg TechBase Neu\",\n    \"address\": {\n        \"country\": \"Germany\",\n        \"zip\": \"93053\",\n        \"city\": \"Regensburg\",\n        \"street\": \"Franz-Mayer-Straße 1\",\n        \"number\": \"1\"\n    },\n    \"vatId\": \"DE 123 456 789\",\n    \"googlePlacesId\": null,\n    \"validFrom\": \"2020-06-01T08:00:00+00:00\"\n}"
 								},
 								{
-									"key": "take",
-									"value": "100",
-									"description": "How much elements to take for pagination.",
-									"disabled": true
+									"name": "Add store",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Id\": \"01234\",\n    \"ShortName\": \"ReTech\",\n    \"LongName\": \"Regensburg TechBase\",\n    \"Address\": {\n        \"Country\": \"Germany\",\n        \"Zip\": \"93053\",\n        \"City\": \"Regensburg\",\n        \"Street\": \"Franz-Mayer-Straße 1\",\n        \"Number\": \"1\"\n    },\n    \"VatId\": \"DE 123 456 789\",\n    \"ValidFrom\": \"2020-06-01T08:00:00.000Z\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/api/:version/store",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												":version",
+												"store"
+											],
+											"variable": [
+												{
+													"key": "version",
+													"value": "v1",
+													"description": "API version"
+												}
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Length",
+											"value": "267"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Location",
+											"value": "https://anybill-vendorapi-test.azurewebsites.net/api/v1/store/01234"
+										},
+										{
+											"key": "Server",
+											"value": "Microsoft-IIS/10.0"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=60; includeSubDomains; preload"
+										},
+										{
+											"key": "api-supported-versions",
+											"value": "2.0"
+										},
+										{
+											"key": "api-deprecated-versions",
+											"value": "1.0"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "ASP.NET"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Mar 2020 12:10:33 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": \"01234\",\n    \"shortName\": \"ReTech\",\n    \"longName\": \"Regensburg TechBase\",\n    \"address\": {\n        \"country\": \"Germany\",\n        \"zip\": \"93053\",\n        \"city\": \"Regensburg\",\n        \"street\": \"Franz-Mayer-Straße 1\",\n        \"number\": \"1\"\n    },\n    \"vatId\": \"DE 123 456 789\",\n    \"googlePlacesId\": null,\n    \"validFrom\": \"2020-06-01T08:00:00+00:00\"\n}"
 								}
 							]
 						},
-						"description": "Lists all stores."
-					},
-					"response": []
-				},
-				{
-					"name": "Get store",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/v1/store/01234",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"store",
-								"01234"
-							]
-						},
-						"description": "Gets the store with the given id."
-					},
-					"response": []
-				},
-				{
-					"name": "Get store history",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/v1/store/01234/history",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"store",
-								"01234",
-								"history"
-							]
-						},
-						"description": "Gets the history of the store with the given id."
-					},
-					"response": []
-				},
-				{
-					"name": "Upsert store",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"Id\": \"01234\",\r\n  \"ShortName\": \"ReTech\",\r\n  \"LongName\": \"Regensburg TechBase\",\r\n  \"Address\": {\r\n    \"Country\": \"Germany\",\r\n    \"Zip\": \"93053\",\r\n    \"City\": \"Regensburg\",\r\n    \"Street\": \"Franz-Mayer-Straße 1\",\r\n    \"Number\": \"1\"\r\n  },\r\n  \"VatId\": \"DE 123 456 789\",\r\n  \"ValidFrom\": \"2019-12-01T08:00:00.000Z\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/api/v1/store",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"store"
-							]
-						},
-						"description": "Creates or updates the store. The valid from datetime will be set to the current timestamp if null or in the past."
-					},
-					"response": []
-				},
-				{
-					"name": "Delete store",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/v1/store/1234?upUntilValidFrom=2020-12-31T23:59:59.999Z",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"store",
-								"1234"
-							],
-							"query": [
+						{
+							"name": "Delete store",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/:version/store/:storeId?",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										":version",
+										"store",
+										":storeId"
+									],
+									"query": [
+										{
+											"key": "upUntilValidFrom",
+											"value": "2020-12-31T23:59:59.999Z",
+											"description": "The datetime up until the store history should be deleted.",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "version",
+											"value": "v1",
+											"description": "API version"
+										},
+										{
+											"key": "storeId",
+											"value": "",
+											"description": "Id of the store"
+										}
+									]
+								},
+								"description": "Deletes the store with the given id."
+							},
+							"response": [
 								{
-									"key": "upUntilValidFrom",
-									"value": "2020-12-31T23:59:59.999Z",
-									"description": "The datetime up until the store history should be deleted."
+									"name": "Delete store \"01234\"",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/:version/store/:storeId?upUntilValidFrom=2020-12-31T23:59:59.999Z",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												":version",
+												"store",
+												":storeId"
+											],
+											"query": [
+												{
+													"key": "upUntilValidFrom",
+													"value": "2020-12-31T23:59:59.999Z",
+													"description": "The datetime up until the store history should be deleted."
+												}
+											],
+											"variable": [
+												{
+													"key": "version",
+													"value": "v1",
+													"description": "API version"
+												},
+												{
+													"key": "storeId",
+													"value": "01234",
+													"description": "Id of the store"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Server",
+											"value": "Microsoft-IIS/10.0"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=60; includeSubDomains; preload"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Mar 2020 12:00:35 GMT"
+										}
+									],
+									"cookie": [],
+									"body": null
 								}
 							]
-						},
-						"description": "Deletes the store with the given id."
-					},
-					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "Category",
-			"item": [
-				{
-					"name": "Get categories",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/v1/category",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"category"
-							]
-						},
-						"description": "Lists all categories."
-					},
-					"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
 				},
 				{
-					"name": "Get category",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/v1/category/10fe80ed-c7d7-4687-90ef-5b9e37a486a5",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"category",
-								"10fe80ed-c7d7-4687-90ef-5b9e37a486a5"
+					"name": "Category",
+					"item": [
+						{
+							"name": "Get categories",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/:version/category",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										":version",
+										"category"
+									],
+									"variable": [
+										{
+											"key": "version",
+											"value": "v1",
+											"description": "API version"
+										}
+									]
+								},
+								"description": "Lists all categories."
+							},
+							"response": [
+								{
+									"name": "Get categories example",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/:version/category",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												":version",
+												"category"
+											],
+											"variable": [
+												{
+													"key": "version",
+													"value": "v1",
+													"description": "API version"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Length",
+											"value": "963"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=60; includeSubDomains; preload"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Mar 2020 12:01:50 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"id\": \"a54a8f03-7537-46fb-8c93-05f7b54c839a\",\n        \"name\": \"Post & Paket\"\n    },\n    {\n        \"id\": \"3f776627-7283-4eac-baad-07c8778a951a\",\n        \"name\": \"Accessoires\"\n    },\n    {\n        \"id\": \"a6e9f52c-9c8d-4023-914c-0bbcf7a37420\",\n        \"name\": \"Elektronik\"\n    },\n    {\n        \"id\": \"921a6fdb-35a5-400f-ab18-203c1ddedb47\",\n        \"name\": \"Schreibwaren\"\n    },\n    {\n        \"id\": \"40833a87-f708-4624-a699-2ac6aea0fd35\",\n        \"name\": \"Großhandel\"\n    },\n    {\n        \"id\": \"e67401e6-a1e2-4456-8cff-55f3d7a968c7\",\n        \"name\": \"Kleidung\"\n    },\n    {\n        \"id\": \"10fe80ed-c7d7-4687-90ef-5b9e37a486a5\",\n        \"name\": \"Lebensmittel\"\n    },\n    {\n        \"id\": \"e258c50c-0f1c-4ed9-8f2f-85bd53461c5f\",\n        \"name\": \"Gesundheit\"\n    },\n    {\n        \"id\": \"67b7cb7e-3c9c-42e5-b864-9214d797fb55\",\n        \"name\": \"Tickets\"\n    },\n    {\n        \"id\": \"459429ca-d625-4300-9c80-a553adcb589f\",\n        \"name\": \"Baumarkt\"\n    },\n    {\n        \"id\": \"ea57ed39-a45e-47ba-bda1-ad26e8a3cab7\",\n        \"name\": \"Freizeit\"\n    },\n    {\n        \"id\": \"1e6683a7-8601-4c8d-9e81-ae6cfed913cf\",\n        \"name\": \"Home\"\n    },\n    {\n        \"id\": \"983dc1c5-a1b2-4a98-a263-b51e9496d343\",\n        \"name\": \"Reise & Transport\"\n    },\n    {\n        \"id\": \"254dc713-fa06-4c04-a3f7-c5d3674f12ee\",\n        \"name\": \"Gastronomie\"\n    },\n    {\n        \"id\": \"3fa16c26-e497-4463-a361-ca5264bf01e3\",\n        \"name\": \"Hotel\"\n    },\n    {\n        \"id\": \"a3beef8e-5a3d-4b2f-a5b7-cb61bc61724b\",\n        \"name\": \"Beauty\"\n    },\n    {\n        \"id\": \"f4a97778-4607-49a9-b57c-d798dc3fb586\",\n        \"name\": \"Sonstiges\"\n    },\n    {\n        \"id\": \"f4a99f44-1953-4938-a207-e0306e1f8028\",\n        \"name\": \"Spielwaren\"\n    },\n    {\n        \"id\": \"74145157-7c3f-422c-8027-e40090b7a60d\",\n        \"name\": \"Drogerie\"\n    }\n]"
+								}
 							]
 						},
-						"description": "Gets the category with the given id."
-					},
-					"response": []
+						{
+							"name": "Get category",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/:version/category/:categoryId",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										":version",
+										"category",
+										":categoryId"
+									],
+									"variable": [
+										{
+											"key": "version",
+											"value": "v1",
+											"description": "API version"
+										},
+										{
+											"key": "categoryId",
+											"value": "",
+											"description": "Id of the category"
+										}
+									]
+								},
+								"description": "Gets the category with the given id."
+							},
+							"response": [
+								{
+									"name": "Get category \"Lebensmittel\"",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/:version/category/:categoryId",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												":version",
+												"category",
+												":categoryId"
+											],
+											"variable": [
+												{
+													"key": "version",
+													"value": "v1",
+													"description": "API version"
+												},
+												{
+													"key": "categoryId",
+													"value": "10fe80ed-c7d7-4687-90ef-5b9e37a486a5",
+													"description": "Id of the category"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Length",
+											"value": "67"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=60; includeSubDomains; preload"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Mar 2020 12:02:53 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": \"10fe80ed-c7d7-4687-90ef-5b9e37a486a5\",\n    \"name\": \"Lebensmittel\"\n}"
+								}
+							]
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Bill",
+					"item": [
+						{
+							"name": "Add bill to user",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n    \"storeId\": \"01234\",\r\n    \"bill\": {\r\n      \"transactionId\": \"PID00057112:37\",\r\n      \"date\": \"2020-02-29T18:58:37.123Z\",\r\n      \"customText\": \"Vielen Dank für Ihr Vertrauen in uns!\",\r\n      \"lineItems\": [\r\n        {\r\n          \"quantityType\": 0,\r\n          \"quantity\": 2,\r\n          \"pricePaid\": 12.95,\r\n          \"originalPrice\": 15,\r\n          \"vat\": 19,\r\n          \"sequenceNumber\": 0,\r\n          \"priceModifier\": 2,\r\n          \"name\": \"Trittleiter\",\r\n          \"ean\": \"5329858234\",\r\n          \"categoryId\": \"459429CA-D625-4300-9C80-A553ADCB589F\"\r\n        },\r\n        {\r\n          \"quantityType\": 1,\r\n          \"quantity\": 0.736,\r\n          \"pricePaid\": 1.50,\r\n          \"vat\": 7,\r\n          \"sequenceNumber\": 1,\r\n          \"name\": \"Bananen\",\r\n          \"categoryId\": \"1E6683A7-8601-4C8D-9E81-AE6CFED913CF\"\r\n        }\r\n      ],\r\n      \"categories\": [\r\n        \"459429CA-D625-4300-9C80-A553ADCB589F\",\r\n        \"1E6683A7-8601-4C8D-9E81-AE6CFED913CF\",\r\n        \"921A6FDB-35A5-400F-AB18-203C1DDEDB47\"\r\n      ],\r\n      \"beginDateTime\": \"2020-02-29T18:56:11.573Z\",\r\n      \"endDateTime\": \"2020-02-29T18:58:37.123Z\",\r\n      \"tenders\": [\r\n        {\r\n          \"tenderTypeId\": \"CASH\",\r\n          \"currencyCode\": \"EUR\",\r\n          \"amount\": 27.00\r\n        }\r\n      ],\r\n      \"totalAmountPaid\": 27.00,\r\n      \"totalTaxPaid\": 4.21,\r\n      \"securityModuleNumber\": \"12345Test\"\r\n    }\r\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/:version/bill",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										":version",
+										"bill"
+									],
+									"variable": [
+										{
+											"key": "version",
+											"value": "v1",
+											"description": "API version"
+										}
+									]
+								},
+								"description": "Adds a receipt for the given user to the System."
+							},
+							"response": [
+								{
+									"name": "Add bill to user",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"userId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n    \"storeId\": \"01234\",\r\n    \"bill\": {\r\n      \"transactionId\": \"PID00057112:37\",\r\n      \"date\": \"2020-02-29T18:58:37.123Z\",\r\n      \"customText\": \"Vielen Dank für Ihr Vertrauen in uns!\",\r\n      \"lineItems\": [\r\n        {\r\n          \"quantityType\": 0,\r\n          \"quantity\": 2,\r\n          \"pricePaid\": 12.95,\r\n          \"originalPrice\": 15,\r\n          \"vat\": 19,\r\n          \"sequenceNumber\": 0,\r\n          \"priceModifier\": 2,\r\n          \"name\": \"Trittleiter\",\r\n          \"ean\": \"5329858234\",\r\n          \"categoryId\": \"459429CA-D625-4300-9C80-A553ADCB589F\"\r\n        },\r\n        {\r\n          \"quantityType\": 1,\r\n          \"quantity\": 0.736,\r\n          \"pricePaid\": 1.50,\r\n          \"vat\": 7,\r\n          \"sequenceNumber\": 1,\r\n          \"name\": \"Bananen\",\r\n          \"categoryId\": \"1E6683A7-8601-4C8D-9E81-AE6CFED913CF\"\r\n        }\r\n      ],\r\n      \"categories\": [\r\n        \"459429CA-D625-4300-9C80-A553ADCB589F\",\r\n        \"1E6683A7-8601-4C8D-9E81-AE6CFED913CF\",\r\n        \"921A6FDB-35A5-400F-AB18-203C1DDEDB47\"\r\n      ],\r\n      \"beginDateTime\": \"2020-02-29T18:56:11.573Z\",\r\n      \"endDateTime\": \"2020-02-29T18:58:37.123Z\",\r\n      \"tenders\": [\r\n        {\r\n          \"tenderTypeId\": \"CASH\",\r\n          \"currencyCode\": \"EUR\",\r\n          \"amount\": 27.00\r\n        }\r\n      ],\r\n      \"totalAmountPaid\": 27.00,\r\n      \"totalTaxPaid\": 4.21,\r\n      \"securityModuleNumber\": \"12345Test\"\r\n    }\r\n  }",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/api/:version/bill",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												":version",
+												"bill"
+											],
+											"variable": [
+												{
+													"key": "version",
+													"value": "v1",
+													"description": "API version"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=60; includeSubDomains; preload"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Mar 2020 13:57:36 GMT"
+										}
+									],
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"description": "Collection of endpoints for version 1 of the api.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "6fd0a08e-18e6-4aa2-864d-e15ceafa0da8",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "345cef15-edd5-465f-9ef6-baf3128a5392",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			],
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Bill",
+			"name": "v2",
 			"item": [
 				{
-					"name": "Add bill",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"UserId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"StoreId\": \"01234\",\r\n  \"Bill\": {\r\n    \"TransactionId\": \"PID00057112:37\",\r\n    \"Date\": \"2019-10-11T12:37:13.485Z\",\r\n    \"BeginDateTime\": \"2019-10-11T12:36:58.175Z\",\r\n    \"EndDateTime\": \"2019-10-11T12:37:13.485Z\",\r\n    \"TotalAmountPaid\": \"112.90\",\r\n    \"TotalTaxPaid\": \"21.45\",\r\n    \"CustomText\": \"Vielen Dank für Ihr Vertrauen in uns!\",\r\n    \"LineItems\": [\r\n      {\r\n        \"Quantity\": 1,\r\n        \"PricePaid\": 12.95,\r\n        \"OriginalPrice\": 12.95,\r\n        \"Vat\": 19,\r\n        \"SequenceNumber\": 0,\r\n        \"PriceModifier\": 0,\r\n        \"Name\": \"Trittleiter\",\r\n        \"Ean\": \"5329858234\",\r\n        \"CategoryId\": \"459429CA-D625-4300-9C80-A553ADCB589F\"\r\n      },\r\n      {\r\n      \t\"QuantityType\": \"Count\",\r\n        \"Quantity\": 1,\r\n        \"PricePaid\": 79.95,\r\n        \"OriginalPrice\": 99.95,\r\n        \"Vat\": 19,\r\n        \"SequenceNumber\": 1,\r\n        \"PriceModifier\": 2,\r\n        \"Name\": \"Drehstuhl\",\r\n        \"Ean\": \"7209478435\",\r\n        \"CategoryId\": \"1E6683A7-8601-4C8D-9E81-AE6CFED913CF\"\r\n      }\r\n    ],\r\n    \"Categories\": [\r\n      \"459429CA-D625-4300-9C80-A553ADCB589F\",\r\n      \"1E6683A7-8601-4C8D-9E81-AE6CFED913CF\",\r\n      \"921A6FDB-35A5-400F-AB18-203C1DDEDB47\"\r\n    ],\r\n    \"Tenders\": [\r\n    \t{\r\n    \t\t\"TenderTypeId\": \"CASH\",\r\n    \t\t\"CurrencyCode\": \"EUR\",\r\n    \t\t\"Amount\": 112.90\r\n    \t}\r\n\t]\r\n  }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "Store",
+					"item": [
+						{
+							"name": "Get stores",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/:version/store?",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										":version",
+										"store"
+									],
+									"query": [
+										{
+											"key": "skip",
+											"value": "0",
+											"description": "Elements to skip for pagination.",
+											"disabled": true
+										},
+										{
+											"key": "take",
+											"value": "100",
+											"description": "How much elements to take for pagination.",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "version",
+											"value": "v2",
+											"description": "API version"
+										}
+									]
+								},
+								"description": "Lists all stores."
+							},
+							"response": [
+								{
+									"name": "Get stores example",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/:version/store?",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												":version",
+												"store"
+											],
+											"query": [
+												{
+													"key": "skip",
+													"value": "0",
+													"description": "Elements to skip for pagination.",
+													"disabled": true
+												},
+												{
+													"key": "take",
+													"value": "100",
+													"description": "How much elements to take for pagination.",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "version",
+													"value": "v2",
+													"description": "API version"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Length",
+											"value": "339"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=60; includeSubDomains; preload"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Mar 2020 11:50:51 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"id\": \"01234\",\n        \"displayName\": \"ReTech\",\n        \"legalName\": \"Regensburg TechBase\",\n        \"address\": {\n            \"country\": \"Germany\",\n            \"zip\": \"93053\",\n            \"city\": \"Regensburg\",\n            \"street\": \"Franz-Mayer-Straße 1\",\n            \"number\": \"1\"\n        },\n        \"vatId\": \"DE 123 456 789\",\n        \"googlePlacesId\": null,\n        \"validFrom\": \"2020-02-07T14:00:12.2344235+01:00\"\n    }\n]"
 								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/api/v1/bill",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"bill"
 							]
 						},
-						"description": "Adds a receipt for the given user to the System."
-					},
-					"response": []
+						{
+							"name": "Get store",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/:version/store/:storeId",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										":version",
+										"store",
+										":storeId"
+									],
+									"variable": [
+										{
+											"key": "version",
+											"value": "v2",
+											"description": "API version"
+										},
+										{
+											"key": "storeId",
+											"value": "",
+											"description": "Id of the store"
+										}
+									]
+								},
+								"description": "Gets the store with the given id."
+							},
+							"response": [
+								{
+									"name": "Get store 01234",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/:version/store/:storeId",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												":version",
+												"store",
+												":storeId"
+											],
+											"variable": [
+												{
+													"key": "version",
+													"value": "v2",
+													"description": "API version"
+												},
+												{
+													"key": "storeId",
+													"value": "01234",
+													"description": "Id of the store."
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Length",
+											"value": "259"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=60; includeSubDomains; preload"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Mar 2020 11:49:12 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": \"01234\",\n    \"displayName\": \"ReTech\",\n    \"legalName\": \"Regensburg TechBase\",\n    \"address\": null,\n    \"vatId\": \"DE 123 456 789\",\n    \"googlePlacesId\": null,\n    \"validFrom\": \"2020-02-07T14:00:12.2344235+01:00\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Get store history",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/:version/store/:storeId/history",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										":version",
+										"store",
+										":storeId",
+										"history"
+									],
+									"variable": [
+										{
+											"key": "version",
+											"value": "v2",
+											"description": "API version"
+										},
+										{
+											"key": "storeId",
+											"value": "",
+											"description": "Id of the store"
+										}
+									]
+								},
+								"description": "Gets the history of the store with the given id."
+							},
+							"response": [
+								{
+									"name": "Get history of store \"01234\"",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/:version/store/:storeId/history",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												":version",
+												"store",
+												":storeId",
+												"history"
+											],
+											"variable": [
+												{
+													"key": "version",
+													"value": "v2",
+													"description": "API version"
+												},
+												{
+													"key": "storeId",
+													"value": "01234",
+													"description": "Id of the store."
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Length",
+											"value": "436"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Server",
+											"value": "Microsoft-IIS/10.0"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=60; includeSubDomains; preload"
+										},
+										{
+											"key": "api-supported-versions",
+											"value": "2.0"
+										},
+										{
+											"key": "api-deprecated-versions",
+											"value": "1.0"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "ASP.NET"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Mar 2020 11:57:54 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"createdAt\": \"2020-03-01T11:55:36.2257276+00:00\",\n        \"isDeleted\": false,\n        \"id\": \"01234\",\n        \"displayName\": \"ReTech Neu\",\n        \"legalName\": \"Regensburg TechBase Neu\",\n        \"address\": {\n            \"country\": \"Germany\",\n            \"zip\": \"93053\",\n            \"city\": \"Regensburg\",\n            \"street\": \"Franz-Mayer-Straße 1\",\n            \"number\": \"1\"\n        },\n        \"vatId\": \"DE 123 456 789\",\n        \"googlePlacesId\": null,\n        \"validFrom\": \"2020-06-01T08:00:00+00:00\"\n    },\n    {\n        \"createdAt\": \"2020-02-07T14:00:12.4409794+01:00\",\n        \"isDeleted\": false,\n        \"id\": \"01234\",\n        \"displayName\": \"ReTech\",\n        \"legalName\": \"Regensburg TechBase\",\n        \"address\": {\n            \"country\": \"Germany\",\n            \"zip\": \"93053\",\n            \"city\": \"Regensburg\",\n            \"street\": \"Franz-Mayer-Straße 1\",\n            \"number\": \"1\"\n        },\n        \"vatId\": \"DE 123 456 789\",\n        \"googlePlacesId\": null,\n        \"validFrom\": \"2020-02-07T14:00:12.2344235+01:00\"\n    }\n]"
+								}
+							]
+						},
+						{
+							"name": "Upsert store",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"01234\",\n    \"displayName\": \"ReTech\",\n    \"legalName\": \"Regensburg TechBase\",\n    \"address\": {\n        \"country\": \"Germany\",\n        \"zip\": \"93053\",\n        \"city\": \"Regensburg\",\n        \"street\": \"Franz-Mayer-Straße 1\",\n        \"number\": \"1\"\n    },\n    \"vatId\": \"DE 123 456 789\",\n    \"validFrom\": \"2020-01-01T08:00:00.000Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/:version/store",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										":version",
+										"store"
+									],
+									"variable": [
+										{
+											"key": "version",
+											"value": "v2",
+											"description": "API version"
+										}
+									]
+								},
+								"description": "Creates or updates the store. The valid from datetime will be set to the current timestamp if null or in the past."
+							},
+							"response": [
+								{
+									"name": "Add store",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"id\": \"01234\",\n    \"displayName\": \"ReTech\",\n    \"legalName\": \"Regensburg TechBase\",\n    \"address\": {\n        \"country\": \"Germany\",\n        \"zip\": \"93053\",\n        \"city\": \"Regensburg\",\n        \"street\": \"Franz-Mayer-Straße 1\",\n        \"number\": \"1\"\n    },\n    \"vatId\": \"DE 123 456 789\",\n    \"validFrom\": \"2020-01-01T08:00:00.000Z\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/api/:version/store",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												":version",
+												"store"
+											],
+											"variable": [
+												{
+													"key": "version",
+													"value": "v2",
+													"description": "API version"
+												}
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Length",
+											"value": "278"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Location",
+											"value": "https://anybill-vendorapi-test.azurewebsites.net/api/v2/store/01234"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=60; includeSubDomains; preload"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Mar 2020 13:43:02 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": \"01234\",\n    \"displayName\": \"ReTech\",\n    \"legalName\": \"Regensburg TechBase\",\n    \"address\": {\n        \"country\": \"Germany\",\n        \"zip\": \"93053\",\n        \"city\": \"Regensburg\",\n        \"street\": \"Franz-Mayer-Straße 1\",\n        \"number\": \"1\"\n    },\n    \"vatId\": \"DE 123 456 789\",\n    \"googlePlacesId\": null,\n    \"validFrom\": \"2020-03-01T13:43:02.9308635+00:00\"\n}"
+								},
+								{
+									"name": "Update store \"01234\"",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Id\": \"01234\",\n    \"ShortName\": \"ReTech Neu\",\n    \"LongName\": \"Regensburg TechBase Neu\",\n    \"Address\": {\n        \"Country\": \"Germany\",\n        \"Zip\": \"93053\",\n        \"City\": \"Regensburg\",\n        \"Street\": \"Franz-Mayer-Straße 1\",\n        \"Number\": \"1\"\n    },\n    \"VatId\": \"DE 123 456 789\",\n    \"ValidFrom\": \"2020-06-01T08:00:00.000Z\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/api/:version/store",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												":version",
+												"store"
+											],
+											"variable": [
+												{
+													"key": "version",
+													"value": "v2",
+													"description": "API version"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Length",
+											"value": "330"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=60; includeSubDomains; preload"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Mar 2020 11:55:36 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": \"01234\",\n    \"displayName\": \"ReTech Neu\",\n    \"legalName\": \"Regensburg TechBase Neu\",\n    \"address\": {\n        \"country\": \"Germany\",\n        \"zip\": \"93053\",\n        \"city\": \"Regensburg\",\n        \"street\": \"Franz-Mayer-Straße 1\",\n        \"number\": \"1\"\n    },\n    \"vatId\": \"DE 123 456 789\",\n    \"googlePlacesId\": null,\n    \"validFrom\": \"2020-06-01T08:00:00+00:00\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Delete store",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/:version/store/:storeId?",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										":version",
+										"store",
+										":storeId"
+									],
+									"query": [
+										{
+											"key": "upUntilValidFrom",
+											"value": "2020-12-31T23:59:59.999Z",
+											"description": "The datetime up until the store history should be deleted.",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "version",
+											"value": "v2",
+											"description": "API version"
+										},
+										{
+											"key": "storeId",
+											"value": "",
+											"description": "Id of the store"
+										}
+									]
+								},
+								"description": "Deletes the store with the given id."
+							},
+							"response": [
+								{
+									"name": "Delete store \"01234\"",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/:version/store/:storeId?upUntilValidFrom=2020-12-31T23:59:59.999Z",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												":version",
+												"store",
+												":storeId"
+											],
+											"query": [
+												{
+													"key": "upUntilValidFrom",
+													"value": "2020-12-31T23:59:59.999Z",
+													"description": "The datetime up until the store history should be deleted."
+												}
+											],
+											"variable": [
+												{
+													"key": "version",
+													"value": "v2",
+													"description": "API version"
+												},
+												{
+													"key": "storeId",
+													"value": "01234",
+													"description": "Id of the store"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Server",
+											"value": "Microsoft-IIS/10.0"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=60; includeSubDomains; preload"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Mar 2020 12:00:35 GMT"
+										}
+									],
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Category",
+					"item": [
+						{
+							"name": "Get categories",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/:version/category",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										":version",
+										"category"
+									],
+									"variable": [
+										{
+											"key": "version",
+											"value": "v2",
+											"description": "API version"
+										}
+									]
+								},
+								"description": "Lists all categories."
+							},
+							"response": [
+								{
+									"name": "Get categories example",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/:version/category",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												":version",
+												"category"
+											],
+											"variable": [
+												{
+													"key": "version",
+													"value": "v2",
+													"description": "API version"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Length",
+											"value": "963"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=60; includeSubDomains; preload"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Mar 2020 12:01:50 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"id\": \"a54a8f03-7537-46fb-8c93-05f7b54c839a\",\n        \"name\": \"Post & Paket\"\n    },\n    {\n        \"id\": \"3f776627-7283-4eac-baad-07c8778a951a\",\n        \"name\": \"Accessoires\"\n    },\n    {\n        \"id\": \"a6e9f52c-9c8d-4023-914c-0bbcf7a37420\",\n        \"name\": \"Elektronik\"\n    },\n    {\n        \"id\": \"921a6fdb-35a5-400f-ab18-203c1ddedb47\",\n        \"name\": \"Schreibwaren\"\n    },\n    {\n        \"id\": \"40833a87-f708-4624-a699-2ac6aea0fd35\",\n        \"name\": \"Großhandel\"\n    },\n    {\n        \"id\": \"e67401e6-a1e2-4456-8cff-55f3d7a968c7\",\n        \"name\": \"Kleidung\"\n    },\n    {\n        \"id\": \"10fe80ed-c7d7-4687-90ef-5b9e37a486a5\",\n        \"name\": \"Lebensmittel\"\n    },\n    {\n        \"id\": \"e258c50c-0f1c-4ed9-8f2f-85bd53461c5f\",\n        \"name\": \"Gesundheit\"\n    },\n    {\n        \"id\": \"67b7cb7e-3c9c-42e5-b864-9214d797fb55\",\n        \"name\": \"Tickets\"\n    },\n    {\n        \"id\": \"459429ca-d625-4300-9c80-a553adcb589f\",\n        \"name\": \"Baumarkt\"\n    },\n    {\n        \"id\": \"ea57ed39-a45e-47ba-bda1-ad26e8a3cab7\",\n        \"name\": \"Freizeit\"\n    },\n    {\n        \"id\": \"1e6683a7-8601-4c8d-9e81-ae6cfed913cf\",\n        \"name\": \"Home\"\n    },\n    {\n        \"id\": \"983dc1c5-a1b2-4a98-a263-b51e9496d343\",\n        \"name\": \"Reise & Transport\"\n    },\n    {\n        \"id\": \"254dc713-fa06-4c04-a3f7-c5d3674f12ee\",\n        \"name\": \"Gastronomie\"\n    },\n    {\n        \"id\": \"3fa16c26-e497-4463-a361-ca5264bf01e3\",\n        \"name\": \"Hotel\"\n    },\n    {\n        \"id\": \"a3beef8e-5a3d-4b2f-a5b7-cb61bc61724b\",\n        \"name\": \"Beauty\"\n    },\n    {\n        \"id\": \"f4a97778-4607-49a9-b57c-d798dc3fb586\",\n        \"name\": \"Sonstiges\"\n    },\n    {\n        \"id\": \"f4a99f44-1953-4938-a207-e0306e1f8028\",\n        \"name\": \"Spielwaren\"\n    },\n    {\n        \"id\": \"74145157-7c3f-422c-8027-e40090b7a60d\",\n        \"name\": \"Drogerie\"\n    }\n]"
+								}
+							]
+						},
+						{
+							"name": "Get category",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/:version/category/:categoryId",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										":version",
+										"category",
+										":categoryId"
+									],
+									"variable": [
+										{
+											"key": "version",
+											"value": "v2",
+											"description": "API version"
+										},
+										{
+											"key": "categoryId",
+											"value": "",
+											"description": "Id of the category"
+										}
+									]
+								},
+								"description": "Gets the category with the given id."
+							},
+							"response": [
+								{
+									"name": "Get category \"Lebensmittel\"",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/:version/category/:categoryId",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												":version",
+												"category",
+												":categoryId"
+											],
+											"variable": [
+												{
+													"key": "version",
+													"value": "v2",
+													"description": "API version"
+												},
+												{
+													"key": "categoryId",
+													"value": "10fe80ed-c7d7-4687-90ef-5b9e37a486a5",
+													"description": "Id of the category"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Length",
+											"value": "67"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=60; includeSubDomains; preload"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Mar 2020 12:02:53 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": \"10fe80ed-c7d7-4687-90ef-5b9e37a486a5\",\n    \"name\": \"Lebensmittel\"\n}"
+								}
+							]
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Bill",
+					"item": [
+						{
+							"name": "Add bill to user",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"storeId\": \"01234\",\r\n    \"bill\": {\r\n      \"date\": \"2020-02-29T18:58:37.123Z\",\r\n      \"customText\": \"Vielen Dank für Ihr Vertrauen in uns!\",\r\n      \"lineItems\": [\r\n        {\r\n          \"quantityType\": 0,\r\n          \"quantity\": 2,\r\n          \"unitGrossPrice\": 12.95,\r\n          \"unitNetPrice\": 10.88,\r\n          \"totalNetPrice\": 21.76,\r\n          \"totalGrossPrice\": 25.90,\r\n          \"unitOriginalGrossPrice\": 15,\r\n          \"discountValue\": 2.05,\r\n          \"priceModifier\": 2,\r\n          \"totalVatAmount\": 4.14,\r\n          \"vat\": 19,\r\n          \"sequenceNumber\": 0,\r\n          \"name\": \"Trittleiter\",\r\n          \"ean\": \"5329858234\",\r\n          \"categoryId\": \"459429CA-D625-4300-9C80-A553ADCB589F\"\r\n        },        \r\n        {\r\n            \"quantityType\": \"Kilogram\",\r\n            \"quantity\": 0.736,\r\n            \"unitGrossPrice\": 1.50,\r\n            \"unitNetPrice\": 1.40,\r\n            \"totalNetPrice\": 1.03,\r\n            \"totalGrossPrice\": 1.10,\r\n            \"totalVatAmount\": 0.07,\r\n            \"vat\": 7,\r\n            \"sequenceNumber\": 1,\r\n            \"name\": \"Bananen\",\r\n            \"categoryId\": \"1E6683A7-8601-4C8D-9E81-AE6CFED913CF\"\r\n          }\r\n      ],\r\n      \"categories\": [\r\n        \"459429CA-D625-4300-9C80-A553ADCB589F\",\r\n        \"1E6683A7-8601-4C8D-9E81-AE6CFED913CF\",\r\n        \"921A6FDB-35A5-400F-AB18-203C1DDEDB47\"\r\n      ],\r\n      \"tenders\": [\r\n        {\r\n          \"tenderType\": 1,\r\n          \"currencyCode\": \"EUR\",\r\n          \"amount\": 7\r\n        },\r\n        {\r\n            \"tenderType\": 5,\r\n            \"currencyCode\": \"EUR\",\r\n            \"amount\": 20,\r\n            \"detailedType\": \"Geschenkgutschein Typ 1\",\r\n            \"paymentDetails\": {\r\n                \"initialBalance\": 50,\r\n                \"remainingBalance\": 30,\r\n                \"dateOfExpiry\": \"2021-01-01T00:00:00.000Z\"\r\n            }\r\n        }\r\n      ],\r\n      \"totalGrossAmount\": 27.00,\r\n      \"totalNetAmount\": 22.79,\r\n      \"totalTaxAmount\": 4.21,\r\n      \"currencyCode\": \"EUR\",\r\n      \"legalInformation\": {\r\n        \"beginDateTime\": \"2020-02-29T18:56:11.573Z\",\r\n        \"endDateTime\": \"2020-02-29T18:58:37.123Z\",\r\n        \"securityModuleNumber\": \"12345Test\",\r\n        \"transactionId\": \"PID00057112:37\"\r\n      }\r\n    }\r\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/:version/bill/user/:userId",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										":version",
+										"bill",
+										"user",
+										":userId"
+									],
+									"variable": [
+										{
+											"key": "version",
+											"value": "v2",
+											"description": "API version"
+										},
+										{
+											"key": "userId",
+											"value": "",
+											"description": "Id of the user to add the bill to"
+										}
+									]
+								},
+								"description": "Adds a receipt for the given user to the System."
+							},
+							"response": [
+								{
+									"name": "Add bill to user",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"storeId\": \"01234\",\r\n    \"bill\": {\r\n      \"date\": \"2020-02-29T18:58:37.123Z\",\r\n      \"customText\": \"Vielen Dank für Ihr Vertrauen in uns!\",\r\n      \"lineItems\": [\r\n        {\r\n          \"quantityType\": 0,\r\n          \"quantity\": 2,\r\n          \"unitGrossPrice\": 12.95,\r\n          \"unitNetPrice\": 10.88,\r\n          \"totalNetPrice\": 21.76,\r\n          \"totalGrossPrice\": 25.90,\r\n          \"unitOriginalGrossPrice\": 15,\r\n          \"discountValue\": 2.05,\r\n          \"priceModifier\": 2,\r\n          \"totalVatAmount\": 4.14,\r\n          \"vat\": 19,\r\n          \"sequenceNumber\": 0,\r\n          \"name\": \"Trittleiter\",\r\n          \"ean\": \"5329858234\",\r\n          \"categoryId\": \"459429CA-D625-4300-9C80-A553ADCB589F\"\r\n        },        \r\n        {\r\n            \"quantityType\": \"Kilogram\",\r\n            \"quantity\": 0.736,\r\n            \"unitGrossPrice\": 1.50,\r\n            \"unitNetPrice\": 1.40,\r\n            \"totalNetPrice\": 1.03,\r\n            \"totalGrossPrice\": 1.10,\r\n            \"totalVatAmount\": 0.07,\r\n            \"vat\": 7,\r\n            \"sequenceNumber\": 1,\r\n            \"name\": \"Bananen\",\r\n            \"categoryId\": \"1E6683A7-8601-4C8D-9E81-AE6CFED913CF\"\r\n          }\r\n      ],\r\n      \"categories\": [\r\n        \"459429CA-D625-4300-9C80-A553ADCB589F\",\r\n        \"1E6683A7-8601-4C8D-9E81-AE6CFED913CF\",\r\n        \"921A6FDB-35A5-400F-AB18-203C1DDEDB47\"\r\n      ],\r\n      \"tenders\": [\r\n        {\r\n          \"tenderType\": 1,\r\n          \"currencyCode\": \"EUR\",\r\n          \"amount\": 7\r\n        },\r\n        {\r\n            \"tenderType\": 5,\r\n            \"currencyCode\": \"EUR\",\r\n            \"amount\": 20,\r\n            \"detailedType\": \"Geschenkgutschein Typ 1\",\r\n            \"paymentDetails\": {\r\n                \"initialBalance\": 50,\r\n                \"remainingBalance\": 30,\r\n                \"dateOfExpiry\": \"2021-01-01T00:00:00.000Z\"\r\n            }\r\n        }\r\n      ],\r\n      \"totalGrossAmount\": 27.00,\r\n      \"totalNetAmount\": 22.79,\r\n      \"totalTaxAmount\": 4.21,\r\n      \"currencyCode\": \"EUR\",\r\n      \"legalInformation\": {\r\n        \"beginDateTime\": \"2020-02-29T18:56:11.573Z\",\r\n        \"endDateTime\": \"2020-02-29T18:58:37.123Z\",\r\n        \"securityModuleNumber\": \"12345Test\",\r\n        \"transactionId\": \"PID00057112:37\"\r\n      }\r\n    }\r\n  }",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/api/:version/bill/user/:userId",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												":version",
+												"bill",
+												"user",
+												":userId"
+											],
+											"variable": [
+												{
+													"key": "version",
+													"value": "v2",
+													"description": "API version"
+												},
+												{
+													"key": "userId",
+													"value": "DFF83E66-2EE6-4174-9869-0FDD2BA8DDB8",
+													"description": "Id of the user to add the bill to"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=60; includeSubDomains; preload"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Mar 2020 13:34:34 GMT"
+										}
+									],
+									"cookie": [],
+									"body": null
+								}
+							]
+						},
+						{
+							"name": "Add anonymous bill",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"storeId\": \"01234\",\r\n    \"bill\": {\r\n      \"date\": \"2020-02-29T18:58:37.123Z\",\r\n      \"customText\": \"Vielen Dank für Ihr Vertrauen in uns!\",\r\n      \"lineItems\": [\r\n        {\r\n          \"quantityType\": 0,\r\n          \"quantity\": 2,\r\n          \"unitGrossPrice\": 12.95,\r\n          \"unitNetPrice\": 10.88,\r\n          \"totalNetPrice\": 21.76,\r\n          \"totalGrossPrice\": 25.90,\r\n          \"unitOriginalGrossPrice\": 15,\r\n          \"discountValue\": 2.05,\r\n          \"priceModifier\": 2,\r\n          \"totalVatAmount\": 4.14,\r\n          \"vat\": 19,\r\n          \"sequenceNumber\": 0,\r\n          \"name\": \"Trittleiter\",\r\n          \"ean\": \"5329858234\",\r\n          \"categoryId\": \"459429CA-D625-4300-9C80-A553ADCB589F\"\r\n        },        \r\n        {\r\n            \"quantityType\": \"Kilogram\",\r\n            \"quantity\": 0.736,\r\n            \"unitGrossPrice\": 1.50,\r\n            \"unitNetPrice\": 1.40,\r\n            \"totalNetPrice\": 1.03,\r\n            \"totalGrossPrice\": 1.10,\r\n            \"totalVatAmount\": 0.07,\r\n            \"vat\": 7,\r\n            \"sequenceNumber\": 1,\r\n            \"name\": \"Bananen\",\r\n            \"categoryId\": \"1E6683A7-8601-4C8D-9E81-AE6CFED913CF\"\r\n          }\r\n      ],\r\n      \"categories\": [\r\n        \"459429CA-D625-4300-9C80-A553ADCB589F\",\r\n        \"1E6683A7-8601-4C8D-9E81-AE6CFED913CF\",\r\n        \"921A6FDB-35A5-400F-AB18-203C1DDEDB47\"\r\n      ],\r\n      \"tenders\": [\r\n        {\r\n          \"tenderType\": 1,\r\n          \"currencyCode\": \"EUR\",\r\n          \"amount\": 7\r\n        },\r\n        {\r\n            \"tenderType\": 5,\r\n            \"currencyCode\": \"EUR\",\r\n            \"amount\": 20,\r\n            \"detailedType\": \"Geschenkgutschein\",\r\n            \"paymentDetails\": {\r\n                \"initialBalance\": 50,\r\n                \"remainingBalance\": 30,\r\n                \"dateOfExpiry\": \"2021-01-01T00:00:00.000Z\"\r\n            }\r\n        }\r\n      ],\r\n      \"totalGrossAmount\": 27.00,\r\n      \"totalNetAmount\": 22.79,\r\n      \"totalTaxAmount\": 4.21,\r\n      \"currencyCode\": \"EUR\",\r\n      \"legalInformation\": {\r\n        \"beginDateTime\": \"2020-02-29T18:56:11.573Z\",\r\n        \"endDateTime\": \"2020-02-29T18:58:37.123Z\",\r\n        \"securityModuleNumber\": \"12345Test\",\r\n        \"transactionId\": \"PID00057112:37\"\r\n      }\r\n    }\r\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/:version/bill",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										":version",
+										"bill"
+									],
+									"variable": [
+										{
+											"key": "version",
+											"value": "v2",
+											"description": "API version"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Add anonymous bill example",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"storeId\": \"01234\",\r\n    \"bill\": {\r\n      \"date\": \"2020-02-29T18:58:37.123Z\",\r\n      \"customText\": \"Vielen Dank für Ihr Vertrauen in uns!\",\r\n      \"lineItems\": [\r\n        {\r\n          \"quantityType\": 0,\r\n          \"quantity\": 2,\r\n          \"unitGrossPrice\": 12.95,\r\n          \"unitNetPrice\": 10.88,\r\n          \"totalNetPrice\": 21.76,\r\n          \"totalGrossPrice\": 25.90,\r\n          \"unitOriginalGrossPrice\": 15,\r\n          \"discountValue\": 2.05,\r\n          \"priceModifier\": 2,\r\n          \"totalVatAmount\": 4.14,\r\n          \"vat\": 19,\r\n          \"sequenceNumber\": 0,\r\n          \"name\": \"Trittleiter\",\r\n          \"ean\": \"5329858234\",\r\n          \"categoryId\": \"459429CA-D625-4300-9C80-A553ADCB589F\"\r\n        },        \r\n        {\r\n            \"quantityType\": \"Kilogram\",\r\n            \"quantity\": 0.736,\r\n            \"unitGrossPrice\": 1.50,\r\n            \"unitNetPrice\": 1.40,\r\n            \"totalNetPrice\": 1.03,\r\n            \"totalGrossPrice\": 1.10,\r\n            \"totalVatAmount\": 0.07,\r\n            \"vat\": 7,\r\n            \"sequenceNumber\": 1,\r\n            \"name\": \"Bananen\",\r\n            \"categoryId\": \"1E6683A7-8601-4C8D-9E81-AE6CFED913CF\"\r\n          }\r\n      ],\r\n      \"categories\": [\r\n        \"459429CA-D625-4300-9C80-A553ADCB589F\",\r\n        \"1E6683A7-8601-4C8D-9E81-AE6CFED913CF\",\r\n        \"921A6FDB-35A5-400F-AB18-203C1DDEDB47\"\r\n      ],\r\n      \"tenders\": [\r\n        {\r\n          \"tenderType\": 1,\r\n          \"currencyCode\": \"EUR\",\r\n          \"amount\": 7\r\n        },\r\n        {\r\n            \"tenderType\": 5,\r\n            \"currencyCode\": \"EUR\",\r\n            \"amount\": 20,\r\n            \"detailedType\": \"Geschenkgutschein\",\r\n            \"paymentDetails\": {\r\n                \"initialBalance\": 50,\r\n                \"remainingBalance\": 30,\r\n                \"dateOfExpiry\": \"2021-01-01T00:00:00.000Z\"\r\n            }\r\n        }\r\n      ],\r\n      \"totalGrossAmount\": 27.00,\r\n      \"totalNetAmount\": 22.79,\r\n      \"totalTaxAmount\": 4.21,\r\n      \"currencyCode\": \"EUR\",\r\n      \"legalInformation\": {\r\n        \"beginDateTime\": \"2020-02-29T18:56:11.573Z\",\r\n        \"endDateTime\": \"2020-02-29T18:58:37.123Z\",\r\n        \"securityModuleNumber\": \"12345Test\",\r\n        \"transactionId\": \"PID00057112:37\"\r\n      }\r\n    }\r\n  }",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/api/:version/bill",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												":version",
+												"bill"
+											],
+											"variable": [
+												{
+													"key": "version",
+													"value": "v2",
+													"description": "API version"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Length",
+											"value": "188"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=60; includeSubDomains; preload"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Mar 2020 13:32:16 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"url\": \"https://www.anybill.de/bill/40a74cd9-08e3-4715-73ae-08d7bde4f531\"\n}"
+								}
+							]
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "53a0d68e-edb2-4970-b869-a84705b46e54",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a9c31e10-6196-45d7-8267-d562c9b98df5",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"description": "Collection of endpoints for version 2 of the api.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "4e8c3f50-a691-4aaf-8b94-1bd315b063d8",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "27b0d2cd-4ccb-4666-bfd7-86e13275c615",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -361,25 +2146,25 @@
 	],
 	"variable": [
 		{
-			"id": "690b6098-66e8-430f-865f-6094d1beb56c",
+			"id": "1f5f9fa9-339e-4956-b455-abb69d9c0460",
 			"key": "username",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "81ae6c0f-4f1a-45a3-a707-e6145518f1ca",
+			"id": "e97e9423-88e8-416f-9f74-4db6a8473bb5",
 			"key": "password",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "452b3388-7be2-4ff2-8dea-fe03f4f1f9e8",
+			"id": "195439dd-6b43-4d18-bbe4-cfac9791ff0c",
 			"key": "client_id",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "527763dd-e69e-490c-b902-48f707da84df",
+			"id": "ee04bd48-8d20-4649-ba85-b401ec7edc7e",
 			"key": "access_token",
 			"value": "",
 			"type": "string"

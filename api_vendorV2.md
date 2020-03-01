@@ -2,17 +2,17 @@
 This document describes the usage of the anybill vendor REST API V2.
 
 ## Environments
-There version 2 is currently in preview and is not yet deployed to our public environments. An open api specification can already be found [here](./specification_V2_Preview.json). There are currently two public environments:
+The version 2 is currently in preview and is only yet deployed to our staging environment. An open api specification can be found [here](./specification_V2_Preview.json). There are currently two public environments:
 
 ### Production: `https://vendor-api.anybill.de`
-This environment is for production use.  
+This environment is for production use. **Not yet updated to v2.**  
 [SwaggerUI](https://vendor-api.anybill.de/index.html)  
-[OpenApi-Specification](https://vendor-api.anybill.de/swagger/v1/swagger.json)
+[OpenApi-Specification](https://vendor-api.anybill.de/swagger/v2/swagger.json)
 
 ### Staging: `https://vendor-api-stg.anybill.de`
 This environment is for integration testing.  
 [SwaggerUI](https://vendor-api-stg.anybill.de/index.html)  
-[OpenApi-Specification](https://vendor-api-stg.anybill.de/swagger/v1/swagger.json)
+[OpenApi-Specification](https://vendor-api-stg.anybill.de/swagger/v2/swagger.json)
 
 # Bill
 The bill controller offers two routes which can be used to add bills into the anybill system:
@@ -21,7 +21,7 @@ The bill controller offers two routes which can be used to add bills into the an
 
 The `bill/user/{userId}`-route can be used to add a bill for a registered user. This is the case if the QR-Code provided by the app gets scanned at POS. For a better description of the structure of the QR-Code have a look [here](./app_qr.md).
 
-The `bill`-Route can be used to add an anonymous bill. This is the case if the customer does not scan his QR-Code at the POS. This route enables the vendor to issue a digital receipt to the customer. A JSON-Object which contains a url retrieve the receipt will be returned.
+The `bill`-route can be used to add an anonymous bill. This is the case if the customer does not scan his QR-Code at the POS. This route enables the vendor to issue a digital receipt to the customer. A JSON-Object which contains a url retrieve the receipt will be returned.
 > Example:
 >
 >{ "url": "https://path-to-receipt.anybill.de/{receiptId}" }
@@ -92,8 +92,8 @@ Possible Values for priceModifier:
 |---------------------|:-----:|--------------------------------------------------------------------------------------------------------------------------|
 | None (default)      |   0   | No discount gets applied.                                                                                                |
 | Percentage          |   1   | A discount of a specific percentage gets applied. E.g. 20 %                                                              |
-| Monetary            |   2   | The line item gross unit price is reduced by a certain amount. E.g. reduced by 2 € based on the original price per unit. |
-| MonetaryReplacement |   3   | The line item price is reduced to a certain price. E.g. original price: 4 € price now: 3 €                               |
+| Monetary            |   2   | The line item gross unit price is reduced by a certain amount. E.g. reduced by 2€ based on the original price per unit.   |
+| MonetaryReplacement |   3   | The line item price is reduced to a certain price. E.g. original price: 4€ price now: 3€                                 |
 
 > **Example 1:**
 >
@@ -130,7 +130,7 @@ The most important usecase of these endpoints is to enable larger companies to a
 These endpoints list all categories which are available to categorize the line items and the bill.
 
 # Postman
-**The postman collection is not yet up to date for v2!** A Postman collection can be found [here](./Postman/Anybill%20Vendor%20Api.postman_collection.json).
+A Postman collection can be found [here](./Postman/Anybill%20Vendor%20Api.postman_collection.json). It has different folders for v1 and v2. There are examples for each requests.
 There are also environments for [Staging](./Postman/Environments/Anybill%20VendorApi%20Staging.postman_environment.json) and [Production](./Postman/Environments/Anybill%20VendorApi%20Production.postman_environment.json)
 
 To acquire an access_token first set your credentials for the following collection variables:
@@ -151,5 +151,7 @@ Some general migration information:
 
 # Changelog
 Changes to the V2 Api will be documented here.
+
+### **2020-03-01** Preview deployed to staging environment. Only small adjustments done.
 
 ### **2020-02-27** Initial Preview

@@ -152,6 +152,8 @@ Some general migration information:
 # Changelog
 Changes to the V2 Api will be documented here.
 
+### **2020-03-01** Added coupons to bill.
+
 ### **2020-03-01** Preview deployed to staging environment. Only small adjustments done.
 
 ### **2020-02-27** Initial Preview

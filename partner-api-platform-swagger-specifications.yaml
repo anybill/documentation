@@ -1,0 +1,2094 @@
+openapi: 3.0.1
+info:
+  title: anybill PartnerPlatformAPI
+  description: <p>Api for the anybill partner platform.</p><p><a href='../'>Swagger UI</a></p><p><a href='../redoc'>ReDoc</a></p>
+  contact:
+    name: Patrick Göttler
+    url: 'https://anybill.de/'
+    email: patrick.goettler@anybill.de
+  version: '1.0'
+paths:
+  '/api/v1/bill/transaction/{transactionId}':
+    get:
+      tags:
+        - Bill
+      summary: Get Bill for a Transaction
+      description: Gets a Bill for a banking Transaction.
+      parameters:
+        - name: transactionId
+          in: path
+          description: The transactions identifier.
+          required: true
+          schema:
+            type: string
+            description: The transactions identifier.
+      responses:
+        '204':
+          description: Returns on success.
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Returns if a bill could not be found for that transaction.
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Returns if an error occurred.
+          content:
+            application/json:
+              schema:
+                type: string
+      security:
+        - oauth2: []
+  /api/v1/bill/transaction:
+    post:
+      tags:
+        - Bill
+      summary: Get Bill for a Transaction
+      description: Gets a Bill for a banking Transaction.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/TransactionsQuery'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/TransactionsQuery'
+          application/*+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/TransactionsQuery'
+        required: true
+      responses:
+        '204':
+          description: Returns on success.
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Returns if a bill could not be found for that transaction.
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Returns if an error occurred.
+          content:
+            application/json:
+              schema:
+                type: string
+      security:
+        - oauth2: []
+  /api/v1/bill/changes:
+    get:
+      tags:
+        - Bill
+      summary: Get bill changes
+      description: "Lists all changed bills of the appUser.\r\nRetrieve until returned count is less than batch size."
+      operationId: GetBillChanges
+      parameters:
+        - name: changesSince
+          in: query
+          description: Datetime of the last known change.
+          schema:
+            type: string
+            description: Datetime of the last known change.
+            format: date-time
+            nullable: true
+        - name: skip
+          in: query
+          description: Elements to skip for pagination.
+          schema:
+            type: integer
+            description: Elements to skip for pagination.
+            format: int32
+            default: 0
+        - name: take
+          in: query
+          description: How much elements to take for pagination.
+          schema:
+            type: integer
+            description: How much elements to take for pagination.
+            format: int32
+            default: 100
+      responses:
+        '200':
+          description: Returns on success.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BillBaseDto'
+        '204':
+          description: Returns if no data was found.
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Returns if an error occurred.
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+      security:
+        - oauth2: []
+  '/api/v1/bill/{billId}/pdf':
+    get:
+      tags:
+        - Bill
+      summary: Export bill as pdf
+      description: Gets a pdf export of a bill.
+      parameters:
+        - name: billId
+          in: path
+          description: The bills id to be exported.
+          required: true
+          schema:
+            type: string
+            description: The bills id to be exported.
+            format: uuid
+        - name: userId
+          in: query
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Returns on success.
+        '400':
+          description: Returns if the bill could not be exported.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Returns if the appUser is not authorized to access this bill.
+          content:
+            application/json:
+              schema:
+                type: string
+        '404':
+          description: Returns if the bill could not be found.
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Returns if an error occurred.
+          content:
+            application/json:
+              schema:
+                type: string
+      security:
+        - oauth2: []
+  /api/v1/bill/scan:
+    post:
+      tags:
+        - Bill
+      summary: Add scanned bill with ocr
+      description: Adds a scanned bill to the system and returns the ocr example.
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              required:
+                - file
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+            encoding:
+              file:
+                style: form
+      responses:
+        '201':
+          description: Returns on success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillScanDto'
+        '400':
+          description: Returns if the bill scan could not be added.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Returns if an error occurred.
+          content:
+            application/json:
+              schema:
+                type: string
+      security:
+        - oauth2: []
+  '/api/v1/bill/scan/{billScanId}':
+    put:
+      tags:
+        - Bill
+      summary: Update scanned bill
+      description: Updates a scanned bill in the system.
+      parameters:
+        - name: billScanId
+          in: path
+          description: The id of the bill scan to be updated.
+          required: true
+          schema:
+            type: string
+            description: The id of the bill scan to be updated.
+            format: uuid
+      requestBody:
+        description: A Dto containing the scanned bill which should be added.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpSertBillScanDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpSertBillScanDto'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UpSertBillScanDto'
+        required: true
+      responses:
+        '200':
+          description: Returns on success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillScanDto'
+        '400':
+          description: Returns if model validation or add failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Returns if the bill scan could not be found.
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Returns if an error occurred.
+          content:
+            application/json:
+              schema:
+                type: string
+      security:
+        - oauth2: []
+  '/api/v1/bill/scan/{billScanId}/picture':
+    post:
+      tags:
+        - Bill
+      summary: Update bill scan image
+      description: 'Uploads an image for the bill scan, removes the old image if one exists and updates the bill scan.'
+      parameters:
+        - name: billScanId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              required:
+                - file
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+            encoding:
+              file:
+                style: form
+      responses:
+        '204':
+          description: Returns on success.
+        '400':
+          description: Returns if the bill scan could not be updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '401':
+          description: Returns if the appUser is not authorized to access this bill.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: Forbidden
+        '404':
+          description: Returns if the bill scan could not be found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Returns if an error occurred.
+          content:
+            application/json:
+              schema:
+                type: string
+      security:
+        - oauth2: []
+  '/api/v1/bill/{billId}':
+    delete:
+      tags:
+        - Bill
+      summary: Delete bill
+      description: Deletes a bill from the system.
+      parameters:
+        - name: billId
+          in: path
+          description: The bills id to be deleted.
+          required: true
+          schema:
+            type: string
+            description: The bills id to be deleted.
+            format: uuid
+      responses:
+        '204':
+          description: Returns on success.
+        '400':
+          description: Returns if the bill could not be deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '401':
+          description: Returns if the appUser is not authorized to access this bill.
+          content:
+            application/json:
+              schema:
+                type: string
+        '403':
+          description: Forbidden
+        '404':
+          description: Returns if the bill could not be found.
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Returns if an error occurred.
+          content:
+            application/json:
+              schema:
+                type: string
+      security:
+        - oauth2: []
+  '/api/v1/bill/scan/{billscanId}/picture':
+    get:
+      tags:
+        - Bill
+      summary: Gets the scan of a scanned bill from the system.
+      parameters:
+        - name: billscanId
+          in: path
+          description: The bills id to get the picture of.
+          required: true
+          schema:
+            type: string
+            description: The bills id to get the picture of.
+            format: uuid
+      responses:
+        '200':
+          description: Returns the bill scan image.
+          content:
+            application/json:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '401':
+          description: Returns if the appUser is not authorized to access this bill.
+          content:
+            application/json:
+              schema:
+                type: string
+        '403':
+          description: Forbidden
+        '404':
+          description: Returns if the bill could not be found.
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Returns if an error occurred.
+          content:
+            application/json:
+              schema:
+                type: string
+      security:
+        - oauth2: []
+  /api/v1/category:
+    get:
+      tags:
+        - Category
+      summary: Get all categories
+      description: Lists all categories.
+      responses:
+        '200':
+          description: Returns on success.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CategoryDto'
+        '204':
+          description: Returns if no data was found.
+          content:
+            application/json:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Returns if an error occurred.
+          content:
+            application/json:
+              schema:
+                type: string
+      security:
+        - oauth2: []
+  '/api/v1/category/{categoryId}':
+    get:
+      tags:
+        - Category
+      summary: Get category
+      description: Gets the category with the given id.
+      parameters:
+        - name: categoryId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Returns on success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryDto'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Returns if the category was not found.
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Returns if an error occurred.
+          content:
+            application/json:
+              schema:
+                type: string
+      security:
+        - oauth2: []
+  /api/v1/tree/total:
+    get:
+      tags:
+        - Tree
+      summary: Get total trees planted
+      description: Gets the total amount of trees planted.
+      responses:
+        '200':
+          description: Returns on success.
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Returns if an error occurred.
+      security:
+        - oauth2: []
+  '/api/v1/tree/{id}':
+    get:
+      tags:
+        - Tree
+      summary: Get trees planted by user
+      description: Gets the amount of tree planted by a appUser.
+      parameters:
+        - name: id
+          in: path
+          description: Id of the appUser
+          required: true
+          schema:
+            type: string
+            description: Id of the appUser
+            format: uuid
+      responses:
+        '200':
+          description: Returns on success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserTreesDto'
+        '204':
+          description: Returns if no data was found.
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Returns if an error occurred.
+      security:
+        - oauth2: []
+  /api/v1/tree/level:
+    get:
+      tags:
+        - Tree
+      summary: Get all tree levels
+      description: Lists all tree levels.
+      responses:
+        '200':
+          description: Returns on success.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreeLevelDto'
+        '204':
+          description: Returns if no data was found.
+          content:
+            application/json:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Returns if an error occurred.
+          content:
+            application/json:
+              schema:
+                type: string
+      security:
+        - oauth2: []
+  '/api/v1/tree/level/{treeLevelId}':
+    get:
+      tags:
+        - Tree
+      summary: Get tree level
+      description: Gets the tree level with the given id.
+      parameters:
+        - name: treeLevelId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Returns on success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TreeLevelDto'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Returns if the tree level was not found.
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Returns if an error occurred.
+          content:
+            application/json:
+              schema:
+                type: string
+      security:
+        - oauth2: []
+  '/api/v1/tree/{id}/info':
+    get:
+      tags:
+        - Tree
+      summary: Get tree info for appUser
+      description: Gets a treeInfo object for the appUser.
+      parameters:
+        - name: id
+          in: path
+          description: Id of the appUser
+          required: true
+          schema:
+            type: string
+            description: Id of the appUser
+            format: uuid
+      responses:
+        '200':
+          description: Returns on success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TreeInfoDto'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Returns if an error occurred.
+          content:
+            application/json:
+              schema:
+                type: string
+      security:
+        - oauth2: []
+  /api/v1/user:
+    post:
+      tags:
+        - User
+      summary: Create anonymous appUser
+      description: Creates an new anonymous appUser.
+      responses:
+        '201':
+          description: Returns on success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterAnonymousUserDto'
+        '400':
+          description: Returns if the data is invalid.
+          content:
+            application/json:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Returns if an error occurred.
+          content:
+            application/json:
+              schema:
+                type: string
+      security:
+        - oauth2: []
+  '/api/v1/user/{id}':
+    get:
+      tags:
+        - User
+      summary: Get appUser information
+      description: Gets information about the logged in appUser.
+      operationId: GetUserInformation
+      parameters:
+        - name: id
+          in: path
+          description: Id of the appUser
+          required: true
+          schema:
+            type: string
+            description: Id of the appUser
+            format: uuid
+      responses:
+        '200':
+          description: Returns on success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserInformationDto'
+        '400':
+          description: Returns if the data could bot be synced.
+          content:
+            application/json:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Returns if an error occurred.
+          content:
+            application/json:
+              schema:
+                type: string
+      security:
+        - oauth2: []
+    delete:
+      tags:
+        - User
+      summary: Delete anonymous appUser
+      description: Deletes an anonymous appUser.
+      parameters:
+        - name: id
+          in: path
+          description: Id of the appUser to delete.
+          required: true
+          schema:
+            type: string
+            description: Id of the appUser to delete.
+            format: uuid
+      responses:
+        '204':
+          description: Returns on success.
+        '400':
+          description: Returns if the data is invalid.
+          content:
+            application/json:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Returns if an error occurred.
+          content:
+            application/json:
+              schema:
+                type: string
+      security:
+        - oauth2: []
+  '/api/v1/user/{id}/qr':
+    get:
+      tags:
+        - User
+      summary: Gets appUsers QR code
+      description: Gets a QR code identifying a appUser at a POS.
+      parameters:
+        - name: id
+          in: path
+          description: Id of the appUser
+          required: true
+          schema:
+            type: string
+            description: Id of the appUser
+            format: uuid
+      responses:
+        '200':
+          description: Returns on success.
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Returns if an error occurred.
+          content:
+            application/json:
+              schema:
+                type: string
+      security:
+        - oauth2: []
+components:
+  schemas:
+    TransactionsQuery:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          nullable: true
+        value:
+          type: string
+          nullable: true
+        date:
+          type: string
+          format: date-time
+      additionalProperties: false
+    ReminderDto:
+      required:
+        - days
+      type: object
+      properties:
+        days:
+          maximum: 18250
+          minimum: 0
+          type: integer
+          format: int32
+      additionalProperties: false
+    WarrantyDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        billId:
+          type: string
+          format: uuid
+        warrantyDate:
+          type: string
+          format: date-time
+        reminders:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReminderDto'
+          nullable: true
+        lineItemId:
+          type: string
+          format: uuid
+          nullable: true
+        articleName:
+          type: string
+          nullable: true
+      additionalProperties: false
+    TenderTypeDto:
+      enum:
+        - Miscellaneous
+        - Cash
+        - DirectDebit
+        - CreditCard
+        - OnlinePayment
+        - GiftCard
+        - BankTransfer
+        - Check
+        - LoyaltyCard
+      type: string
+      format: int32
+    PaymentDetailsDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      additionalProperties: false
+      description: Additional payment details.
+    TenderDto:
+      required:
+        - amount
+        - currencyCode
+        - tenderType
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          nullable: true
+        tenderType:
+          $ref: '#/components/schemas/TenderTypeDto'
+        detailedType:
+          maxLength: 48
+          type: string
+          description: The detailed tender type used. E.g. Visa for credit card tender.
+          nullable: true
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: Currency code as of ISO 4217.
+        amount:
+          type: number
+          description: The amount paid with this tender.
+          format: double
+        paymentDetails:
+          $ref: '#/components/schemas/PaymentDetailsDto'
+      additionalProperties: false
+      description: The legal tender used in the transaction.
+    QuantityTypeDto:
+      enum:
+        - Count
+        - Kilogram
+        - Lbs
+        - Meters
+        - Inches
+        - Liter
+        - CubicMeters
+        - SquareMeters
+      type: string
+      format: int32
+    PriceModifierDto:
+      enum:
+        - None
+        - Percentage
+        - Monetary
+        - MonetaryReplacement
+      type: string
+      description: Price modifier applied to line item.
+      format: int32
+    ReturnDto:
+      required:
+        - id
+        - quantity
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        date:
+          type: string
+          format: date-time
+          nullable: true
+        quantity:
+          type: number
+          format: double
+      additionalProperties: false
+    LineItemDto:
+      required:
+        - name
+        - quantity
+        - quantityType
+        - unitGrossPrice
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          nullable: true
+        quantityType:
+          $ref: '#/components/schemas/QuantityTypeDto'
+        quantity:
+          type: number
+          format: double
+        unitGrossPrice:
+          type: number
+          format: double
+        unitNetPrice:
+          type: number
+          format: double
+          nullable: true
+        totalNetPrice:
+          type: number
+          format: double
+          nullable: true
+        totalGrossPrice:
+          type: number
+          format: double
+          nullable: true
+        unitOriginalGrossPrice:
+          type: number
+          format: double
+          nullable: true
+        discountValue:
+          type: number
+          format: double
+          nullable: true
+        priceModifier:
+          $ref: '#/components/schemas/PriceModifierDto'
+        totalVatAmount:
+          type: number
+          format: double
+          nullable: true
+        vat:
+          maximum: 100
+          minimum: 0
+          type: number
+          format: double
+        text:
+          maxLength: 256
+          type: string
+          nullable: true
+        sequenceNumber:
+          maximum: 32767
+          minimum: 0
+          type: integer
+          format: int32
+        name:
+          maxLength: 256
+          type: string
+        description:
+          maxLength: 1024
+          type: string
+          nullable: true
+        ean:
+          maxLength: 128
+          type: string
+          nullable: true
+        returnBarcode:
+          maxLength: 25
+          type: string
+          nullable: true
+        categoryId:
+          type: string
+          format: uuid
+          nullable: true
+        returns:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReturnDto'
+          nullable: true
+      additionalProperties: false
+    BillDiscountDto:
+      required:
+        - value
+      type: object
+      properties:
+        name:
+          maxLength: 60
+          type: string
+          description: Optional name for the discount.
+          nullable: true
+        value:
+          minimum: 0
+          type: number
+          description: Discount value.
+          format: double
+      additionalProperties: false
+    ReturnCodeTypeDto:
+      enum:
+        - Ean13
+        - Text
+        - Qr
+      type: string
+      description: The type of the return code
+      format: int32
+    BillBaseDto:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+          readOnly: true
+        id:
+          type: string
+          format: uuid
+        date:
+          type: string
+          format: date-time
+        createdAtDate:
+          type: string
+          format: date-time
+        totalGrossAmount:
+          type: number
+          format: double
+          nullable: true
+        totalNetAmount:
+          type: number
+          format: double
+          nullable: true
+        totalTaxAmount:
+          type: number
+          format: double
+          nullable: true
+        currencyCode:
+          type: string
+          nullable: true
+        categoryIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          nullable: true
+        warranties:
+          type: array
+          items:
+            $ref: '#/components/schemas/WarrantyDto'
+          nullable: true
+        tenders:
+          type: array
+          items:
+            $ref: '#/components/schemas/TenderDto'
+          nullable: true
+        lineItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItemDto'
+          nullable: true
+        discounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillDiscountDto'
+          description: Discounts applied to every LineItem.
+          nullable: true
+        hasTaxReturnFlag:
+          type: boolean
+        isDeleted:
+          type: boolean
+        gmiDocumentId:
+          type: integer
+          format: int32
+          nullable: true
+        fileeeId:
+          type: string
+          nullable: true
+        posBillId:
+          type: string
+          description: The bill id issued by the POS system. Does not uniquely identify a Bill.
+          nullable: true
+        returnBarcode:
+          maxLength: 25
+          type: string
+          description: Data to display a return barcode.
+          nullable: true
+        returnCodeType:
+          $ref: '#/components/schemas/ReturnCodeTypeDto'
+        lastModifiedDate:
+          type: string
+          description: Datetime when the last change happened to the bill
+          format: date-time
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties:
+        type: object
+        additionalProperties: false
+    BillScanStoreDto:
+      type: object
+      properties:
+        country:
+          maxLength: 150
+          type: string
+          nullable: true
+        zip:
+          maxLength: 12
+          type: string
+          nullable: true
+        city:
+          maxLength: 150
+          type: string
+          nullable: true
+        street:
+          maxLength: 150
+          type: string
+          nullable: true
+        vatId:
+          maxLength: 24
+          type: string
+          nullable: true
+      additionalProperties: false
+    BillScanDto:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/BillBaseDto'
+        - type: object
+          properties:
+            vendorName:
+              type: string
+              nullable: true
+            hasScan:
+              type: boolean
+            hasOCRRun:
+              type: boolean
+            store:
+              $ref: '#/components/schemas/BillScanStoreDto'
+            type:
+              type: string
+              nullable: true
+              readOnly: true
+            id:
+              type: string
+              format: uuid
+            date:
+              type: string
+              format: date-time
+            createdAtDate:
+              type: string
+              format: date-time
+            totalGrossAmount:
+              type: number
+              format: double
+              nullable: true
+            totalNetAmount:
+              type: number
+              format: double
+              nullable: true
+            totalTaxAmount:
+              type: number
+              format: double
+              nullable: true
+            currencyCode:
+              type: string
+              nullable: true
+            categoryIds:
+              type: array
+              items:
+                type: string
+                format: uuid
+              nullable: true
+            warranties:
+              type: array
+              items:
+                $ref: '#/components/schemas/WarrantyDto'
+              nullable: true
+            tenders:
+              type: array
+              items:
+                $ref: '#/components/schemas/TenderDto'
+              nullable: true
+            lineItems:
+              type: array
+              items:
+                $ref: '#/components/schemas/LineItemDto'
+              nullable: true
+            discounts:
+              type: array
+              items:
+                $ref: '#/components/schemas/BillDiscountDto'
+              description: Discounts applied to every LineItem.
+              nullable: true
+            hasTaxReturnFlag:
+              type: boolean
+            isDeleted:
+              type: boolean
+            gmiDocumentId:
+              type: integer
+              format: int32
+              nullable: true
+            fileeeId:
+              type: string
+              nullable: true
+            posBillId:
+              type: string
+              description: The bill id issued by the POS system. Does not uniquely identify a Bill.
+              nullable: true
+            returnBarcode:
+              maxLength: 25
+              type: string
+              description: Data to display a return barcode.
+              nullable: true
+            returnCodeType:
+              $ref: '#/components/schemas/ReturnCodeTypeDto'
+            lastModifiedDate:
+              type: string
+              description: Datetime when the last change happened to the bill
+              format: date-time
+      additionalProperties: false
+      discriminator:
+        propertyName: $type
+      x-ms-discriminator-value: 'Anybill.PartnerPlatformAPI.Models.DTO.V1.Bill.BillScanDto, Anybill.PartnerPlatformAPI'
+    UpSertBillScanDto:
+      required:
+        - date
+        - totalGrossAmount
+      type: object
+      properties:
+        vendorName:
+          maxLength: 128
+          type: string
+          nullable: true
+        date:
+          type: string
+          format: date-time
+        totalGrossAmount:
+          type: number
+          format: double
+        totalNetAmount:
+          type: number
+          format: double
+          nullable: true
+        totalTaxAmount:
+          minimum: 0
+          type: number
+          format: double
+          nullable: true
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          nullable: true
+        billScanStore:
+          $ref: '#/components/schemas/BillScanStoreDto'
+        categoryIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          nullable: true
+        lineItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItemDto'
+          nullable: true
+        tenders:
+          type: array
+          items:
+            $ref: '#/components/schemas/TenderDto'
+          nullable: true
+        discounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillDiscountDto'
+          nullable: true
+        posBillId:
+          type: string
+          description: The bill id issued by the POS system. Does not uniquely identify a Bill.
+          nullable: true
+        returnBarcode:
+          maxLength: 25
+          type: string
+          description: Data to display a return barcode.
+          nullable: true
+      additionalProperties: false
+    CategoryDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          nullable: true
+        iconResource:
+          type: string
+          nullable: true
+        color:
+          type: integer
+          format: int32
+      additionalProperties: false
+    UserTreesDto:
+      type: object
+      properties:
+        treeCount:
+          type: integer
+          format: int32
+      additionalProperties: false
+    TreeLevelDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        iconResource:
+          type: string
+          nullable: true
+        treeCount:
+          type: integer
+          format: int32
+        billCount:
+          type: integer
+          format: int32
+      additionalProperties: false
+    TreeInfoDto:
+      type: object
+      properties:
+        userBillCount:
+          type: integer
+          format: int32
+        userTreeCount:
+          type: integer
+          format: int32
+        totalTreeCount:
+          type: integer
+          format: int32
+        treeLevels:
+          type: array
+          items:
+            $ref: '#/components/schemas/TreeLevelDto'
+          nullable: true
+      additionalProperties: false
+    RegisterAnonymousUserDto:
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      additionalProperties: false
+    AccountLinkStatusDto:
+      enum:
+        - NotLinked
+        - LinkedWithApiKey
+        - LinkedWithoutApiKey
+        - ApiKeyOnly
+      type: string
+      format: int32
+    FileeeUserInfoDto:
+      type: object
+      properties:
+        participantId:
+          type: string
+          description: Participant-id of appUser for example in conversations
+          nullable: true
+        username:
+          type: string
+          description: username (email) of the appUser
+          nullable: true
+        type:
+          type: string
+          description: Type of the appUser
+          nullable: true
+        participantName:
+          type: string
+          description: Display name (name or email) of the appUser
+          nullable: true
+        scopes:
+          type: array
+          items:
+            type: string
+          nullable: true
+      additionalProperties: false
+    UserInformationDto:
+      type: object
+      properties:
+        gmiAccountLinkStatus:
+          $ref: '#/components/schemas/AccountLinkStatusDto'
+        fileeeUserInfo:
+          $ref: '#/components/schemas/FileeeUserInfoDto'
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+          nullable: true
+        firstname:
+          type: string
+          nullable: true
+        lastname:
+          type: string
+          nullable: true
+        birthday:
+          type: string
+          format: date-time
+        gender:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ValidationProblemDetails:
+      type: object
+      properties:
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          nullable: true
+          readOnly: true
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties:
+        type: object
+        additionalProperties: false
+    AddressDto:
+      type: object
+      properties:
+        country:
+          type: string
+          nullable: true
+        zip:
+          type: string
+          nullable: true
+        city:
+          type: string
+          nullable: true
+        street:
+          type: string
+          nullable: true
+        number:
+          type: string
+          nullable: true
+      additionalProperties: false
+    BillStoreDto:
+      type: object
+      properties:
+        displayName:
+          type: string
+          nullable: true
+        legalName:
+          type: string
+          nullable: true
+        address:
+          $ref: '#/components/schemas/AddressDto'
+        vatId:
+          type: string
+          nullable: true
+        googlePlacesId:
+          type: string
+          nullable: true
+      additionalProperties: false
+    BillVendorDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          nullable: true
+        iconResource:
+          type: string
+          nullable: true
+        categoryIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          nullable: true
+      additionalProperties: false
+    LegalInformationDto:
+      type: object
+      properties:
+        beginDateTime:
+          type: string
+          description: The date time of the start of the transaction. This should be in the correct ISO 8601 format to represent the correct timezone.
+          format: date-time
+        endDateTime:
+          type: string
+          description: The date time of the end of the transaction. This should be in the correct ISO 8601 format to represent the correct timezone.
+          format: date-time
+        securityModuleNumber:
+          type: string
+          description: Number of the security module of the cashbox.
+          nullable: true
+        transactionId:
+          type: string
+          description: Identifier for this transaction in the vendors system. Usually represented in form of a barcode on the receipt.
+          nullable: true
+        cashierName:
+          type: string
+          description: Name of the cashier who processed the transaction.
+          nullable: true
+        tseFailure:
+          type: boolean
+          description: Specifies if TSE check was successful.
+        posInspectionQRData:
+          type: string
+          description: Data to display a QR code for a POS inspection.
+          nullable: true
+      additionalProperties: false
+      description: The additional legal information needed to fulfill the standards given by the law.
+    BillDto:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/BillBaseDto'
+        - type: object
+          properties:
+            customText:
+              type: string
+              nullable: true
+            storeId:
+              type: string
+              format: uuid
+            store:
+              $ref: '#/components/schemas/BillStoreDto'
+            vendor:
+              $ref: '#/components/schemas/BillVendorDto'
+            legalInformation:
+              $ref: '#/components/schemas/LegalInformationDto'
+            amountPerTaxRate:
+              type: object
+              additionalProperties:
+                type: number
+                format: double
+              description: 'The amount of paid taxes per tax-rate. E.g. for 7 % tax-rate an amount of 0,15 €.'
+              nullable: true
+            type:
+              type: string
+              nullable: true
+              readOnly: true
+            id:
+              type: string
+              format: uuid
+            date:
+              type: string
+              format: date-time
+            createdAtDate:
+              type: string
+              format: date-time
+            totalGrossAmount:
+              type: number
+              format: double
+              nullable: true
+            totalNetAmount:
+              type: number
+              format: double
+              nullable: true
+            totalTaxAmount:
+              type: number
+              format: double
+              nullable: true
+            currencyCode:
+              type: string
+              nullable: true
+            categoryIds:
+              type: array
+              items:
+                type: string
+                format: uuid
+              nullable: true
+            warranties:
+              type: array
+              items:
+                $ref: '#/components/schemas/WarrantyDto'
+              nullable: true
+            tenders:
+              type: array
+              items:
+                $ref: '#/components/schemas/TenderDto'
+              nullable: true
+            lineItems:
+              type: array
+              items:
+                $ref: '#/components/schemas/LineItemDto'
+              nullable: true
+            discounts:
+              type: array
+              items:
+                $ref: '#/components/schemas/BillDiscountDto'
+              description: Discounts applied to every LineItem.
+              nullable: true
+            hasTaxReturnFlag:
+              type: boolean
+            isDeleted:
+              type: boolean
+            gmiDocumentId:
+              type: integer
+              format: int32
+              nullable: true
+            fileeeId:
+              type: string
+              nullable: true
+            posBillId:
+              type: string
+              description: The bill id issued by the POS system. Does not uniquely identify a Bill.
+              nullable: true
+            returnBarcode:
+              maxLength: 25
+              type: string
+              description: Data to display a return barcode.
+              nullable: true
+            returnCodeType:
+              $ref: '#/components/schemas/ReturnCodeTypeDto'
+            lastModifiedDate:
+              type: string
+              description: Datetime when the last change happened to the bill
+              format: date-time
+      additionalProperties: false
+      discriminator:
+        propertyName: $type
+      x-ms-discriminator-value: 'Anybill.PartnerPlatformAPI.Models.DTO.V1.Bill.BillDto, Anybill.PartnerPlatformAPI'
+    BankTransferPaymentDetailsDto:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaymentDetailsDto'
+        - type: object
+          properties:
+            purposeOfUsage:
+              maxLength: 54
+              type: string
+              description: The purpose of usage the customer has to specify.
+              nullable: true
+            iban:
+              maxLength: 34
+              type: string
+              description: The iban of the recipients bank account.
+              nullable: true
+            bic:
+              maxLength: 11
+              type: string
+              description: The bic of the recipients bank account.
+              nullable: true
+            accountHolderName:
+              maxLength: 30
+              type: string
+              description: The account holder name of the recipients bank account.
+              nullable: true
+            accountNumber:
+              maxLength: 10
+              type: string
+              description: The account number of the recipient.
+              nullable: true
+            bankName:
+              maxLength: 30
+              type: string
+              description: The name of the bank of the recipients bank account.
+              nullable: true
+            bankAddress:
+              maxLength: 128
+              type: string
+              description: The address of the bank of the recipients bank account.
+              nullable: true
+            sortCode:
+              maxLength: 8
+              type: string
+              description: The sort code of the bank of the recipients bank account.
+              nullable: true
+            routingNumber:
+              maxLength: 9
+              type: string
+              description: The routing number used by the bank.
+              nullable: true
+            ifscCode:
+              maxLength: 11
+              type: string
+              description: The ifsc code of the bank branch.
+              nullable: true
+            routingCode:
+              maxLength: 11
+              type: string
+              description: The swift routing code used by the bank.
+              nullable: true
+            terminalId:
+              maxLength: 30
+              type: string
+              description: Id of the terminal.
+              nullable: true
+            terminalText:
+              maxLength: 512
+              type: string
+              description: Terminal text.
+              nullable: true
+            transactionNumber:
+              maxLength: 30
+              type: string
+              description: Number of the card transaction.
+              nullable: true
+            id:
+              type: string
+              format: uuid
+      additionalProperties: false
+      description: Additional optional payment details about the bank transfer tender type.
+    CardPaymentDetailsDto:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaymentDetailsDto'
+        - type: object
+          properties:
+            terminalId:
+              maxLength: 30
+              type: string
+              description: Id of the terminal.
+              nullable: true
+            terminalText:
+              maxLength: 512
+              type: string
+              description: Terminal text.
+              nullable: true
+            transactionNumber:
+              maxLength: 30
+              type: string
+              description: Number of the card transaction.
+              nullable: true
+            id:
+              type: string
+              format: uuid
+      additionalProperties: false
+      description: Additional information for payments using a card terminal.
+    CashPaymentDetailsDto:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaymentDetailsDto'
+        - type: object
+          properties:
+            amountGiven:
+              minimum: 0
+              type: number
+              description: The amount the customer gave to the cashier.
+              format: double
+              nullable: true
+            amountReturned:
+              minimum: 0
+              type: number
+              description: The amount the cashier gave back to the customer.
+              format: double
+              nullable: true
+            id:
+              type: string
+              format: uuid
+      additionalProperties: false
+      description: Additional optional payment details about the cash tender type.
+    CheckPaymentDetailsDto:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaymentDetailsDto'
+        - type: object
+          properties:
+            drawee:
+              maxLength: 30
+              type: string
+              description: The bank where the check can be presented for payment.
+              nullable: true
+            payee:
+              maxLength: 30
+              type: string
+              description: The recipient of the money.
+              nullable: true
+            dateOfIssue:
+              type: string
+              description: The date of issue.
+              format: date-time
+              nullable: true
+            drawer:
+              maxLength: 30
+              type: string
+              description: The person or entity who makes the check.
+              nullable: true
+            sortCode:
+              maxLength: 8
+              type: string
+              description: The sort code of the bank of the issuing bank.
+              nullable: true
+            accountNumber:
+              maxLength: 10
+              type: string
+              description: The account number of the drawer.
+              nullable: true
+            id:
+              type: string
+              format: uuid
+      additionalProperties: false
+      description: Additional optional payment details about the check tender type.
+    CreditCardPaymentDetailsDto:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaymentDetailsDto'
+        - type: object
+          properties:
+            cardNumber:
+              maxLength: 19
+              type: string
+              description: The number of the credit card.
+              nullable: true
+            bankName:
+              maxLength: 30
+              type: string
+              description: Name of the bank that issued the credit card.
+              nullable: true
+            terminalId:
+              maxLength: 30
+              type: string
+              description: Id of the terminal.
+              nullable: true
+            terminalText:
+              maxLength: 512
+              type: string
+              description: Terminal text.
+              nullable: true
+            transactionNumber:
+              maxLength: 30
+              type: string
+              description: Number of the card transaction.
+              nullable: true
+            id:
+              type: string
+              format: uuid
+      additionalProperties: false
+      description: Additional optional payment details about the credit card tender type.
+    DirectDebitPaymentDetailsDto:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaymentDetailsDto'
+        - type: object
+          properties:
+            sepaCreditorId:
+              maxLength: 35
+              type: string
+              description: The sepa creditor id.
+              nullable: true
+            sepaMandateReference:
+              maxLength: 54
+              type: string
+              description: The sepa mandate reference.
+              nullable: true
+            cardNumber:
+              maxLength: 19
+              type: string
+              description: The number of the credit card.
+              nullable: true
+            bankName:
+              maxLength: 30
+              type: string
+              description: Name of the bank that issued the credit card.
+              nullable: true
+            terminalId:
+              maxLength: 30
+              type: string
+              description: Id of the terminal.
+              nullable: true
+            terminalText:
+              maxLength: 512
+              type: string
+              description: Terminal text.
+              nullable: true
+            transactionNumber:
+              maxLength: 30
+              type: string
+              description: Number of the card transaction.
+              nullable: true
+            id:
+              type: string
+              format: uuid
+      additionalProperties: false
+      description: Additional optional payment details about the direct debit tender type.
+    GiftCardPaymentDetailsDto:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaymentDetailsDto'
+        - type: object
+          properties:
+            initialBalance:
+              minimum: 0
+              type: number
+              description: The amount that the gift card was worth before the transaction.
+              format: double
+              nullable: true
+            remainingBalance:
+              minimum: 0
+              type: number
+              description: The amount that is left on the gift card after the transaction.
+              format: double
+              nullable: true
+            dateOfExpiry:
+              type: string
+              description: The date of expiry of the gift card.
+              format: date-time
+              nullable: true
+            id:
+              type: string
+              format: uuid
+      additionalProperties: false
+      description: Additional optional payment details about the gift card tender type.
+    LoyaltyCardPaymentDetailsDto:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaymentDetailsDto'
+        - type: object
+          properties:
+            name:
+              maxLength: 30
+              type: string
+              description: The name for the loyalty system.
+              nullable: true
+            accountNumber:
+              maxLength: 30
+              type: string
+              description: The identifier used in the transaction. E.g. a card number
+              nullable: true
+            pointsUsed:
+              minimum: 0
+              type: number
+              description: The points redeemed for this transaction.
+              format: double
+              nullable: true
+            pointsLeft:
+              minimum: 0
+              type: number
+              description: The points left in the loyalty system.
+              format: double
+              nullable: true
+            pointsGained:
+              minimum: 0
+              type: number
+              description: The points gained in this transaction.
+              format: double
+              nullable: true
+            id:
+              type: string
+              format: uuid
+      additionalProperties: false
+      description: Additional optional payment details about the loyalty card tender type.
+    OnlinePaymentDetailsDto:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaymentDetailsDto'
+        - type: object
+          properties:
+            senderAccountName:
+              maxLength: 50
+              type: string
+              description: Account name of the sender. E.g. an e-mail address for most services.
+              nullable: true
+            recipientAccountName:
+              maxLength: 50
+              type: string
+              description: Account name of the recipient. E.g. an e-mail address for most services.
+              nullable: true
+            transactionId:
+              maxLength: 128
+              type: string
+              description: The identifier for the transaction.
+              nullable: true
+            id:
+              type: string
+              format: uuid
+      additionalProperties: false
+      description: Additional optional payment details about the online payment tender type.
+  securitySchemes:
+    oauth2:
+      type: apiKey
+      description: 'Standard Authorization header using the Bearer scheme. Example: "bearer { token }"'
+      name: Authorization
+      in: header
+
